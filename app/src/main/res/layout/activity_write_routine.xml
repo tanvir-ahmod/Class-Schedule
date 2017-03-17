@@ -12,29 +12,48 @@
     android:orientation="vertical"
     tools:context="com.example.shoukhin.classroutine.WriteRoutine">
 
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/addDayEdtx" />
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+            android:id="@+id/addPreviousDayIbtn"
+            android:layout_weight=".33" />
+
+        <TextView
+            android:text="Saturday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/addDayTBx"
+            android:textAlignment="center"/>
+
+        <ImageButton
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/addNextDayIbtn" />
+
+    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
-        android:id="@+id/addCourseNameEdtx" />
+        android:id="@+id/addCourseNameEdtx"
+        android:hint="Course Name" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
-        android:id="@+id/addCourseCodeEdtx" />
+        android:id="@+id/addCourseCodeEdtx"
+        android:hint="Course Code" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,9 +99,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
-        android:id="@+id/addRoomNumEdtx" />
+        android:id="@+id/addRoomNumEdtx"
+        android:hint="Room Number" />
 
     <Button
         android:text="Save"
