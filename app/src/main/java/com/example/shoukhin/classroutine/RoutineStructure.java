@@ -7,13 +7,13 @@ package com.example.shoukhin.classroutine;
 public class RoutineStructure {
 
 
-    private String roomNumber;
-    private String key;
-    private String day;
-    private String courseName;
-    private String courseCode;
-    private String startTime;
-    private String endTime;
+    public String roomNumber;
+    public String key;
+    public String day;
+    public String courseName;
+    public String courseCode;
+    public String startTime;
+    public String endTime;
 
     public RoutineStructure() {
     }
