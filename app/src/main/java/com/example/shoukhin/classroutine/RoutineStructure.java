@@ -5,13 +5,18 @@ package com.example.shoukhin.classroutine;
  */
 
 public class RoutineStructure {
+
+
+    private String roomNumber;
+    private String key;
     private String day;
     private String courseName;
     private String courseCode;
     private String startTime;
     private String endTime;
-    private String roomNumber;
-    private String key;
+
+    public RoutineStructure() {
+    }
 
     public RoutineStructure(String day, String courseName, String courseCode, String startTime, String endTime, String roomNumber) {
         this.day = day;

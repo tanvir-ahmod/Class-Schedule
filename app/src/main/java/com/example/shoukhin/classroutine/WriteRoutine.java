@@ -36,17 +36,19 @@ public class WriteRoutine extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String tempDay = day.getText().toString();
+                /*String tempDay = day.getText().toString();
                 String tempCourseCode = courseCode.getText().toString();
                 String tempCourseName = courseName.getText().toString();
                 String tempFromTime = fromTime.getText().toString();
                 String temoToTime = toTime.getText().toString();
-                String tempRoomNumber = roomNumber.getText().toString();
+                String tempRoomNumber = roomNumber.getText().toString();*/
 
-                RoutineStructure routine = new RoutineStructure(tempDay, tempCourseName, tempCourseCode, tempFromTime, temoToTime, tempRoomNumber);
+             //   RoutineStructure routine = new RoutineStructure(tempDay, tempCourseName, tempCourseCode, tempFromTime, temoToTime, tempRoomNumber);
+
+                RoutineStructure routine = new RoutineStructure("Friday","b","c","d","e","f");
 
                 key = mFirebaseDatabase.push().getKey();
-                mFirebaseDatabase.child(tempDay).child(key).setValue(routine);
+                mFirebaseDatabase.child("Friday").child(key).setValue(routine);
 
 
             }
