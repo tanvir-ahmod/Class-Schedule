@@ -36,4 +36,58 @@
         android:ems="10"
         android:id="@+id/editText3" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp" >
+
+        <TextView
+            android:id="@+id/addfromtbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="17sp"
+            android:text="From" />
+
+        <TextView
+            android:id="@+id/addfromtimetbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:typeface="serif"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/addtotbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="17sp"
+            android:text="To" />
+
+        <TextView
+            android:id="@+id/addtotimetbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:typeface="serif"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editText4" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2" />
+
 </LinearLayout>
