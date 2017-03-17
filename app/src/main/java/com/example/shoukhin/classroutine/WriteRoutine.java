@@ -2,6 +2,7 @@ package com.example.shoukhin.classroutine;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import java.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -107,11 +108,9 @@ public class WriteRoutine extends AppCompatActivity {
 
                 RoutineStructure routine = new RoutineStructure(tempDay, tempCourseName, tempCourseCode, tempFromTime, temoToTime, tempRoomNumber);
 
-                //RoutineStructure routine = new RoutineStructure("Friday","b","c","d","e","f");
-
                 //saving to firebase database
-                //key = mFirebaseDatabase.push().getKey();
-               // mFirebaseDatabase.child("Friday").child(key).setValue(routine);
+                key = mFirebaseDatabase.push().getKey();
+               mFirebaseDatabase.child(tempDay).child(key).setValue(routine);
 
 
             }
@@ -122,6 +121,8 @@ public class WriteRoutine extends AppCompatActivity {
 
         save = (Button) findViewById(R.id.saveRoutineBtn);
 
+        day = (TextView) findViewById(R.id.addDayTBx);
+
         courseName = (EditText) findViewById(R.id.addCourseNameEdtx);
         courseCode = (EditText) findViewById(R.id.addCourseCodeEdtx);
         roomNumber = (EditText) findViewById(R.id.addRoomNumEdtx);
@@ -131,6 +132,10 @@ public class WriteRoutine extends AppCompatActivity {
 
         nextDay = (ImageButton) findViewById(R.id.addNextDayIbtn);
         previousDay = (ImageButton) findViewById(R.id.addPreviousDayIbtn);
+
+        Calendar calendar = Calendar.getInstance();
+        position = calendar.get(Calendar.DAY_OF_WEEK);
+        day.setText(dayArray[position]);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
     }
