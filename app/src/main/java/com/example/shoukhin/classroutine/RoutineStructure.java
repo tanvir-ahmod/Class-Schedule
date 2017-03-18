@@ -15,6 +15,39 @@ public class RoutineStructure {
     public String startTime;
     public String endTime;
 
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getRoomNumber() {
+
+        return roomNumber;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
     public RoutineStructure() {
     }
 

@@ -1,8 +1,10 @@
 package com.example.shoukhin.classroutine;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ViewRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ListView viewRoutine;
+    BaseAdapter adapter;
+
+    ArrayList<RoutineStructure> allData;
+    ArrayList<RoutineStructure> currentDayData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +45,60 @@ public class ViewRoutine extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        initialize();
+    }
+
+    private void initialize() {
+
+        viewRoutine = (ListView) findViewById(R.id.viewRoutine);
+
+        allData = new ArrayList<>();
+        currentDayData = new ArrayList<>();
+
+        adapter = new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return currentDayData.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return currentDayData.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                if (convertView == null) {
+                    convertView = inflater.inflate(R.layout.listview, null);
+                }
+
+                TextView courseName = (TextView) convertView.findViewById(R.id.listviewCourseName);
+                TextView courseCode = (TextView) convertView.findViewById(R.id.listviewCourseCode);
+                TextView roomNumber = (TextView) convertView.findViewById(R.id.listviewRoomNumbertbx);
+                TextView fromTime = (TextView) convertView.findViewById(R.id.listviewFromtimetbx);
+                TextView toTime = (TextView) convertView.findViewById(R.id.listviewTotimetbx);
+
+                courseName.setText(currentDayData.get(position).getCourseName());
+                courseCode.setText(currentDayData.get(position).getCourseCode());
+                roomNumber.setText(currentDayData.get(position).getRoomNumber());
+                fromTime.setText(currentDayData.get(position).getStartTime());
+                toTime.setText(currentDayData.get(position).getEndTime());
+
+
+                return convertView;
+            }
+        };
+
     }
 
     @Override
