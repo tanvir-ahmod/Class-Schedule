@@ -19,6 +19,12 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class ViewRoutine extends AppCompatActivity
@@ -29,6 +35,8 @@ public class ViewRoutine extends AppCompatActivity
 
     ArrayList<RoutineStructure> allData;
     ArrayList<RoutineStructure> currentDayData;
+
+    private DatabaseReference mFirebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +56,28 @@ public class ViewRoutine extends AppCompatActivity
 
 
         initialize();
+
+        mFirebaseDatabase.child("Friday").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                RoutineStructure routine = dataSnapshot.getValue(RoutineStructure.class);
+                routine.setKey(dataSnapshot.getKey());
+                currentDayData.add(routine);
+
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void initialize() {
+
+        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("routine");
 
         viewRoutine = (ListView) findViewById(R.id.viewRoutine);
 
@@ -98,6 +125,8 @@ public class ViewRoutine extends AppCompatActivity
                 return convertView;
             }
         };
+
+        viewRoutine.setAdapter(adapter);
 
     }
 
