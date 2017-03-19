@@ -84,6 +84,7 @@ public class ViewRoutine extends AppCompatActivity
         mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("routine");
 
         viewRoutine = (ListView) findViewById(R.id.viewRoutine);
+        viewRoutine.setOnTouchListener(new OnSwipeTouchListener(this)); //adding swipe listener to listview
 
         allData = new ArrayList<>();
         currentDayData = new ArrayList<>();
