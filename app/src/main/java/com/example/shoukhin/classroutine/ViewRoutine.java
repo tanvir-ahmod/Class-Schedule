@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -60,12 +61,15 @@ public class ViewRoutine extends AppCompatActivity
         mFirebaseDatabase.child("Friday").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                RoutineStructure routine = dataSnapshot.getValue(RoutineStructure.class);
-                routine.setKey(dataSnapshot.getKey());
-                currentDayData.add(routine);
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    RoutineStructure routine = postSnapshot.getValue(RoutineStructure.class);
+                    routine.setKey(postSnapshot.getKey());
+                    currentDayData.add(routine);
+
+                }
+
 
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override
