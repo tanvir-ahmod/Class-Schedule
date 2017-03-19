@@ -14,6 +14,40 @@
     tools:context="com.example.shoukhin.classroutine.ViewRoutine"
     tools:showIn="@layout/app_bar_view_routine">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/previous"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:id="@+id/viewPreviousDayIbtn"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Saturday"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/viewDayTBx"
+            android:textAlignment="center"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/next"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:id="@+id/viewNextDayIbtn"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

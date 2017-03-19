@@ -18,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,16 +36,20 @@ public class ViewRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ListView viewRoutine;
-    BaseAdapter adapter;
+    private static BaseAdapter adapter;
 
-    ArrayList<RoutineStructure> allData;
-    ArrayList<RoutineStructure> currentDayData;
+    private static ArrayList<RoutineStructure> allData;
+    private static ArrayList<RoutineStructure> currentDayData;
 
     private DatabaseReference mFirebaseDatabase;
 
-    private String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
+    private static String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
 
-    int cuurrentDayPosition;
+    public static int cuurrentDayPosition;
+
+    private static TextView currentDayTbx;
+
+    ImageButton nextDay, previousDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +83,6 @@ public class ViewRoutine extends AppCompatActivity
                     allData.add(routine);
 
                 }
-
-
                 //showing only selected day's routine
                 showCurrentDayRoutine();
 
@@ -90,10 +94,34 @@ public class ViewRoutine extends AppCompatActivity
 
             }
         });
+
+
+        nextDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cuurrentDayPosition++;
+                showCurrentDayRoutine();
+            }
+        });
+
+        previousDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cuurrentDayPosition--;
+                showCurrentDayRoutine();
+            }
+        });
     }
 
-    private void showCurrentDayRoutine() {
+    public static void showCurrentDayRoutine() {
 
+        if(cuurrentDayPosition >= dayArray.length)
+            cuurrentDayPosition = 0;
+
+        else if(cuurrentDayPosition < 0)
+            cuurrentDayPosition = dayArray.length - 1;
+
+        currentDayData.clear();
         for(int i = 0; i < allData.size(); i++)
         {
             //if current selected day is matched then only display that day's data
@@ -103,6 +131,8 @@ public class ViewRoutine extends AppCompatActivity
             }
         }
 
+        currentDayTbx.setText(dayArray[cuurrentDayPosition]);
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -111,6 +141,11 @@ public class ViewRoutine extends AppCompatActivity
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();
         cuurrentDayPosition = calendar.get(Calendar.DAY_OF_WEEK);
+
+        currentDayTbx = (TextView) findViewById(R.id.viewDayTBx);
+
+        nextDay = (ImageButton) findViewById(R.id.viewNextDayIbtn);
+        previousDay = (ImageButton) findViewById(R.id.viewPreviousDayIbtn);
 
         mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("routine");
 

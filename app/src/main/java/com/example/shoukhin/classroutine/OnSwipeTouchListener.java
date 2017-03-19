@@ -66,12 +66,15 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
 
     public void onSwipeRight() {
 
-        Log.d("tag", "right");
+        ViewRoutine.cuurrentDayPosition--;
+        ViewRoutine.showCurrentDayRoutine();
+        //Log.d("tag", "right");
 
     }
 
     public void onSwipeLeft() {
-        Log.d("tag", "left");
+        ViewRoutine.cuurrentDayPosition++;
+        ViewRoutine.showCurrentDayRoutine();
 
     }
 
