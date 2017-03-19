@@ -1,6 +1,7 @@
 package com.example.shoukhin.classroutine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ViewRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +40,10 @@ public class ViewRoutine extends AppCompatActivity
     ArrayList<RoutineStructure> currentDayData;
 
     private DatabaseReference mFirebaseDatabase;
+
+    private String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
+
+    int cuurrentDayPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +64,23 @@ public class ViewRoutine extends AppCompatActivity
 
         initialize();
 
-        mFirebaseDatabase.child("Friday").addValueEventListener(new ValueEventListener() {
+        //getting all routine data from firebase database
+        mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                //loop through the child
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     RoutineStructure routine = postSnapshot.getValue(RoutineStructure.class);
                     routine.setKey(postSnapshot.getKey());
-                    currentDayData.add(routine);
+
+                    //storing all data into a arraylist
+                    allData.add(routine);
 
                 }
 
+
+                //showing only selected day's routine
+                showCurrentDayRoutine();
 
                 adapter.notifyDataSetChanged();
             }
@@ -79,7 +92,25 @@ public class ViewRoutine extends AppCompatActivity
         });
     }
 
+    private void showCurrentDayRoutine() {
+
+        for(int i = 0; i < allData.size(); i++)
+        {
+            //if current selected day is matched then only display that day's data
+            if(allData.get(i).getDay().equals(dayArray[cuurrentDayPosition]))
+            {
+                currentDayData.add(allData.get(i));
+            }
+        }
+
+
+    }
+
     private void initialize() {
+
+        //getting today's day number of the week
+        Calendar calendar = Calendar.getInstance();
+        cuurrentDayPosition = calendar.get(Calendar.DAY_OF_WEEK);
 
         mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("routine");
 
@@ -185,6 +216,10 @@ public class ViewRoutine extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        }
+
+        else if(id == R.id.write_data){
+            startActivity(new Intent(ViewRoutine.this, WriteRoutine.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

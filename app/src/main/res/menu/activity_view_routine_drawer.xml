@@ -6,6 +6,11 @@
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
             android:title="Import" />
+
+        <item
+            android:id="@+id/write_data"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Write Data" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"

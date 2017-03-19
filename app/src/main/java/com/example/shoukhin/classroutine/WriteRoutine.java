@@ -110,7 +110,7 @@ public class WriteRoutine extends AppCompatActivity {
 
                 //saving to firebase database
                 key = mFirebaseDatabase.push().getKey();
-               mFirebaseDatabase.child(tempDay).child(key).setValue(routine);
+               mFirebaseDatabase.child(key).setValue(routine);
 
 
             }
