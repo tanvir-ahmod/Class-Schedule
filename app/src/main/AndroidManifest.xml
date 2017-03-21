@@ -15,7 +15,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".WriteRoutine"></activity>
+        <activity android:name=".WriteRoutine" />
         <activity
             android:name=".ViewRoutine"
             android:label="@string/title_activity_view_routine"
@@ -26,7 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteNotification"></activity>
+        <activity android:name=".WriteNotification" />
+        <activity android:name=".ViewNotification"></activity>
     </application>
 
 </manifest>

@@ -236,7 +236,8 @@ public class ViewRoutine extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-         if (id == R.id.nav_gallery) {
+         if (id == R.id.view_notification) {
+             startActivity(new Intent(ViewRoutine.this, ViewNotification.class));
 
         } else if (id == R.id.nav_slideshow) {
 

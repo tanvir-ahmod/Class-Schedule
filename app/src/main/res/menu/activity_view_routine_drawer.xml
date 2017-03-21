@@ -12,9 +12,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Write Data" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/view_notification"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Notifications" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
