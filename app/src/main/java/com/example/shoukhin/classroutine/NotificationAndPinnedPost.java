@@ -15,7 +15,11 @@ public class NotificationAndPinnedPost {
         time = Calendar.getInstance().getTimeInMillis();
     }
 
+    public NotificationAndPinnedPost() {
+    }
+
     public String getPost() {
+
         return post;
     }
 
