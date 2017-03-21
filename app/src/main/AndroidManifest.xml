@@ -8,16 +8,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <service
             android:name=".MyService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".WriteRoutine">
-
-        </activity>
+        <activity android:name=".WriteRoutine"></activity>
         <activity
             android:name=".ViewRoutine"
             android:label="@string/title_activity_view_routine"
@@ -28,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WriteNotification"></activity>
     </application>
 
 </manifest>

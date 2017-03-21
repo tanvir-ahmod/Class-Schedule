@@ -3,9 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/write_notification"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="write Notification" />
 
         <item
             android:id="@+id/write_data"
