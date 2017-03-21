@@ -42,6 +42,7 @@
         android:id="@+id/textView6" />
 
     <ListView
+        android:id="@+id/view_notification_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

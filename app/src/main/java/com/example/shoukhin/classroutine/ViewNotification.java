@@ -1,7 +1,14 @@
 package com.example.shoukhin.classroutine;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -10,13 +17,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ViewNotification extends AppCompatActivity {
 
-    private DatabaseReference mFirebaseDatabase;
+    private DatabaseReference mFirebaseDatabase, notificationDatabase;
 
     TextView pinnedTbx;
+
+    private  BaseAdapter adapter;
+
+    private  ArrayList<NotificationAndPinnedPost> notifications;
+
+    private ListView viewNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +38,9 @@ public class ViewNotification extends AppCompatActivity {
         setContentView(R.layout.activity_view_notification);
 
         initialize();
-    }
 
-    private void initialize() {
 
-        pinnedTbx = (TextView) findViewById(R.id.view_noti_pin_tbx);
-
-        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("Notice Board").child("notice");
-
+        //pinned post read operation
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -45,6 +54,79 @@ public class ViewNotification extends AppCompatActivity {
 
             }
         });
+
+        notificationDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+
+                    NotificationAndPinnedPost notification = postSnapshot.getValue(NotificationAndPinnedPost.class);
+
+                    notifications.add(notification);
+
+                    //Log.d("tag", notification.getPost());
+                    Log.d("tag", "ok");
+                }
+
+                adapter.notifyDataSetChanged();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void initialize() {
+
+        pinnedTbx = (TextView) findViewById(R.id.view_noti_pin_tbx);
+
+        viewNotification = (ListView) findViewById(R.id.view_notification_listview);
+
+        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("Notice Board").child("notice");
+        notificationDatabase =  FirebaseDatabase.getInstance().getReference("Notification");
+
+        notifications = new ArrayList<>();
+
+        adapter = new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return notifications.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return notifications.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                if (convertView == null) {
+                    convertView = inflater.inflate(R.layout.notification_listview, null);
+                }
+
+                TextView post = (TextView) convertView.findViewById(R.id.noti_listview_post_tbx);
+
+                post.setText(notifications.get(position).getPost());
+
+                return convertView;
+            }
+        };
+
+        viewNotification.setAdapter(adapter);
+
+
+
 
     }
 }

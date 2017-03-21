@@ -75,7 +75,7 @@ public class ViewRoutine extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //loop through the child
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     RoutineStructure routine = postSnapshot.getValue(RoutineStructure.class);
                     routine.setKey(postSnapshot.getKey());
 
@@ -115,18 +115,16 @@ public class ViewRoutine extends AppCompatActivity
 
     public static void showCurrentDayRoutine() {
 
-        if(cuurrentDayPosition >= dayArray.length)
+        if (cuurrentDayPosition >= dayArray.length)
             cuurrentDayPosition = 0;
 
-        else if(cuurrentDayPosition < 0)
+        else if (cuurrentDayPosition < 0)
             cuurrentDayPosition = dayArray.length - 1;
 
         currentDayData.clear();
-        for(int i = 0; i < allData.size(); i++)
-        {
+        for (int i = 0; i < allData.size(); i++) {
             //if current selected day is matched then only display that day's data
-            if(allData.get(i).getDay().equals(dayArray[cuurrentDayPosition]))
-            {
+            if (allData.get(i).getDay().equals(dayArray[cuurrentDayPosition])) {
                 currentDayData.add(allData.get(i));
             }
         }
@@ -147,7 +145,7 @@ public class ViewRoutine extends AppCompatActivity
         nextDay = (ImageButton) findViewById(R.id.viewNextDayIbtn);
         previousDay = (ImageButton) findViewById(R.id.viewPreviousDayIbtn);
 
-        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("routine");
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
 
         viewRoutine = (ListView) findViewById(R.id.viewRoutine);
         viewRoutine.setOnTouchListener(new OnSwipeTouchListener(this)); //adding swipe listener to listview
@@ -236,8 +234,8 @@ public class ViewRoutine extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-         if (id == R.id.view_notification) {
-             startActivity(new Intent(ViewRoutine.this, ViewNotification.class));
+        if (id == R.id.view_notification) {
+            startActivity(new Intent(ViewRoutine.this, ViewNotification.class));
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -247,12 +245,9 @@ public class ViewRoutine extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
-
-        else if(id == R.id.write_data){
+        } else if (id == R.id.write_data) {
             startActivity(new Intent(ViewRoutine.this, WriteRoutine.class));
-        }
-        else if(id == R.id.write_notification){
+        } else if (id == R.id.write_notification) {
             startActivity(new Intent(ViewRoutine.this, WriteNotification.class));
         }
 
