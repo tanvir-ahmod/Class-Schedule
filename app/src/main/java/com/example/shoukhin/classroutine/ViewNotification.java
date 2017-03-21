@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -26,9 +27,9 @@ public class ViewNotification extends AppCompatActivity {
 
     TextView pinnedTbx;
 
-    private  BaseAdapter adapter;
+    private BaseAdapter adapter;
 
-    private  ArrayList<NotificationAndPinnedPost> notifications;
+    private ArrayList<NotificationAndPinnedPost> notifications;
 
     private ListView viewNotification;
 
@@ -58,14 +59,11 @@ public class ViewNotification extends AppCompatActivity {
         notificationDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                     NotificationAndPinnedPost notification = postSnapshot.getValue(NotificationAndPinnedPost.class);
 
                     notifications.add(notification);
-
-                    //Log.d("tag", notification.getPost());
-                    Log.d("tag", "ok");
                 }
 
                 adapter.notifyDataSetChanged();
@@ -86,8 +84,8 @@ public class ViewNotification extends AppCompatActivity {
 
         viewNotification = (ListView) findViewById(R.id.view_notification_listview);
 
-        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("Notice Board").child("notice");
-        notificationDatabase =  FirebaseDatabase.getInstance().getReference("Notification");
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notice Board").child("notice");
+        notificationDatabase = FirebaseDatabase.getInstance().getReference("Notification");
 
         notifications = new ArrayList<>();
 
@@ -116,8 +114,26 @@ public class ViewNotification extends AppCompatActivity {
                 }
 
                 TextView post = (TextView) convertView.findViewById(R.id.noti_listview_post_tbx);
+                TextView time = (TextView) convertView.findViewById(R.id.noti_listview_time_tbx);
 
                 post.setText(notifications.get(position).getPost());
+
+                //calculation post arrival time
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(notifications.get(position).getTime());
+
+                String tempTime = calendar.get(Calendar.DATE) + " " + getMonthForInt(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.YEAR)
+                        + " " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + " ";
+
+                int a = calendar.get(Calendar.AM_PM);
+                if (a == Calendar.AM) {
+                    tempTime += "AM";
+
+                } else
+                    tempTime += "PM";
+
+                time.setText(tempTime);
+
 
                 return convertView;
             }
@@ -125,8 +141,16 @@ public class ViewNotification extends AppCompatActivity {
 
         viewNotification.setAdapter(adapter);
 
+    }
 
 
-
+    private String getMonthForInt(int num) {
+        String month = "wrong";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11) {
+            month = months[num];
+        }
+        return month;
     }
 }
