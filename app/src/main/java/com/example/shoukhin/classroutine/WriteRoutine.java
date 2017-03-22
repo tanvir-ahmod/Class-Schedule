@@ -137,11 +137,16 @@ public class WriteRoutine extends AppCompatActivity {
                 {
                     key = storedKey;
                 }
-                else
-                key = mFirebaseDatabase.push().getKey();
+                else {
+                    key = mFirebaseDatabase.push().getKey();
+                    //isEditable = true; //next save will just overwrite the data
+
+                }
 
                 //save it
                mFirebaseDatabase.child(key).setValue(routine);
+                Toast.makeText(WriteRoutine.this, "saved Successfully", Toast.LENGTH_SHORT).show();
+                finish();
 
 
             }
@@ -186,7 +191,7 @@ public class WriteRoutine extends AppCompatActivity {
 
         save = (Button) findViewById(R.id.saveRoutineBtn);
         delete = (Button) findViewById(R.id.add_delete_btn);
-        //delete.setVisibility(View.GONE); //initially invisibale
+        delete.setVisibility(View.GONE); //initially invisible
 
         day = (TextView) findViewById(R.id.addDayTBx);
 

@@ -1,12 +1,25 @@
 package com.example.shoukhin.classroutine;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by Shoukhin on 21-Mar-17.
  */
 
-public class NotificationAndPinnedPost {
+public class NotificationAndPinnedPost implements Serializable {
+
+    public String key;
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+
+        return key;
+    }
+
     public String post;
     public long time;
 

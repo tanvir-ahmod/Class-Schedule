@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class WriteNotification extends AppCompatActivity {
 
     TextView modifiedTime;
+    boolean isEditable = false;
+
+    String storedKey;
 
     EditText text;
 
@@ -26,6 +30,18 @@ public class WriteNotification extends AppCompatActivity {
         setContentView(R.layout.activity_write_notification);
 
         text = (EditText) findViewById(R.id.write_noti_edtx);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            NotificationAndPinnedPost notification = (NotificationAndPinnedPost) extras.get("notification");
+            text.setText(notification.getPost());
+
+            isEditable = true;
+
+            storedKey = notification.getKey();
+
+        }
 
     }
 
@@ -52,8 +68,19 @@ public class WriteNotification extends AppCompatActivity {
             NotificationAndPinnedPost notification = new NotificationAndPinnedPost(text.getText().toString());
 
             mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notification");
-            String key = mFirebaseDatabase.push().getKey();
-            mFirebaseDatabase.child(key).setValue(notification);
+
+            if(isEditable){
+                mFirebaseDatabase.child(storedKey).setValue(notification);
+            }
+            else {
+                String key = mFirebaseDatabase.push().getKey();
+                mFirebaseDatabase.child(key).setValue(notification);
+
+
+            }
+
+            Toast.makeText(WriteNotification.this, "saved Successfully", Toast.LENGTH_SHORT).show();
+            finish();
 
             //Log.d("tag","saved");
         }
