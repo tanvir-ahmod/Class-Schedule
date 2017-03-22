@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -91,6 +92,19 @@ public class ViewRoutine extends AppCompatActivity
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //to edit or delete by CR
+        viewRoutine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ViewRoutine.this, WriteRoutine.class);
+
+                RoutineStructure routine = currentDayData.get(position);
+                intent.putExtra("routine", routine);
+                startActivity(intent);
 
             }
         });

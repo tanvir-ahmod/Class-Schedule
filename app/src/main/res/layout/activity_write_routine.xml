@@ -115,4 +115,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/saveRoutineBtn" />
 
+    <Button
+        android:text="Delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_delete_btn" />
+
 </LinearLayout>

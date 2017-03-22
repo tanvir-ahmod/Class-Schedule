@@ -1,10 +1,12 @@
 package com.example.shoukhin.classroutine;
 
+import java.io.Serializable;
+
 /**
  * Created by Shoukhin on 16-Mar-17.
  */
 
-public class RoutineStructure {
+public class RoutineStructure implements Serializable {
 
 
     public String roomNumber;

@@ -76,6 +76,8 @@ public class ViewNotification extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     private void initialize() {

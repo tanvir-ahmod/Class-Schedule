@@ -3,6 +3,9 @@ package com.example.shoukhin.classroutine;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import java.util.Calendar;
+
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,10 +35,12 @@ public class WriteRoutine extends AppCompatActivity {
     int position;
     boolean isFromTimeClicked = false;
     boolean isToTimeClicked = false;
+    boolean isEditable = false;
+    String storedKey;
 
     private String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
 
-    Button save;
+    Button save, delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,22 @@ public class WriteRoutine extends AppCompatActivity {
         setContentView(R.layout.activity_write_routine);
 
         initialize();
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            RoutineStructure routine = (RoutineStructure) extras.get("routine");
+            courseName.setText(routine.getCourseName());
+            courseCode.setText(routine.getCourseCode());
+            fromTime.setText(routine.getStartTime());
+            toTime.setText(routine.getEndTime());
+
+            isEditable = true;
+
+            storedKey = routine.getKey();
+
+            delete.setVisibility(View.VISIBLE); //delete button is visibled
+        }
 
         fromTime.setOnClickListener(new View.OnClickListener() {
 
@@ -109,10 +131,53 @@ public class WriteRoutine extends AppCompatActivity {
                 RoutineStructure routine = new RoutineStructure(tempDay, tempCourseName, tempCourseCode, tempFromTime, temoToTime, tempRoomNumber);
 
                 //saving to firebase database
+
+                //if editable, just update the data
+                if(isEditable == true)
+                {
+                    key = storedKey;
+                }
+                else
                 key = mFirebaseDatabase.push().getKey();
+
+                //save it
                mFirebaseDatabase.child(key).setValue(routine);
 
 
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        WriteRoutine.this);
+                alert.setCancelable(false);
+                alert.setTitle("Alert!!");
+                alert.setMessage("Are you sure to delete record?");
+                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseDatabase.getInstance().getReference("routine").child(storedKey).removeValue();
+                        Toast.makeText(WriteRoutine.this, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        finish();
+
+                    }
+                });
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = alert.create();
+
+                alertDialog.show();
             }
         });
     }
@@ -120,6 +185,8 @@ public class WriteRoutine extends AppCompatActivity {
     private void initialize() {
 
         save = (Button) findViewById(R.id.saveRoutineBtn);
+        delete = (Button) findViewById(R.id.add_delete_btn);
+        //delete.setVisibility(View.GONE); //initially invisibale
 
         day = (TextView) findViewById(R.id.addDayTBx);
 
