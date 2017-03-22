@@ -1,6 +1,10 @@
 package com.example.shoukhin.classroutine;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
@@ -14,24 +18,22 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MyService extends Service {
 
-    private DatabaseReference mFirebaseDatabase;
+    private DatabaseReference mFirebaseDatabase, pinnedPost;
     public MyService() {
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("tag", "service Started");
-        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("asd");
+
+        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("Notification");
+        pinnedPost =  FirebaseDatabase.getInstance().getReference("Notice Board");
+
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String text = dataSnapshot.getValue(String.class);
-
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
-
-                Log.d("tag", text);
+                    showNotification("Notice about class!","tap to view");
 
             }
 
@@ -41,8 +43,37 @@ public class MyService extends Service {
             }
         });
 
+        pinnedPost.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showNotification("Pinned post updated","tap to view");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
             return START_STICKY;
+    }
+
+    private void showNotification(String message1, String messege2)
+    {
+        Intent intnt = new Intent(MyService.this, ViewNotification.class);
+
+        PendingIntent pIntent = PendingIntent.getActivity(MyService.this, 0, intnt, 0);
+        Notification n = new Notification.Builder(MyService.this)
+                .setContentTitle(message1).setContentText(messege2)
+                .setContentIntent(pIntent).setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                .build();
+
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(0, n);
     }
 
     @Override

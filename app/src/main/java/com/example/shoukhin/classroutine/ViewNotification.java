@@ -125,6 +125,7 @@ public class ViewNotification extends AppCompatActivity {
                 String tempTime = calendar.get(Calendar.DATE) + " " + getMonthForInt(calendar.get(Calendar.MONTH)) + " " + calendar.get(Calendar.YEAR)
                         + " " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + " ";
 
+                //showing if time is AM or PM
                 int a = calendar.get(Calendar.AM_PM);
                 if (a == Calendar.AM) {
                     tempTime += "AM";

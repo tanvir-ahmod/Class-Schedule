@@ -136,6 +136,9 @@ public class ViewRoutine extends AppCompatActivity
 
     private void initialize() {
 
+        //service for notification given by cr
+        startService(new Intent(getBaseContext(), MyService.class));
+
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();
         cuurrentDayPosition = calendar.get(Calendar.DAY_OF_WEEK);
