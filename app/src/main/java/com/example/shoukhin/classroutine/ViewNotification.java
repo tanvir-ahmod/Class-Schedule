@@ -61,6 +61,8 @@ public class ViewNotification extends AppCompatActivity {
         notificationDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                notifications.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
                     NotificationAndPinnedPost notification = postSnapshot.getValue(NotificationAndPinnedPost.class);

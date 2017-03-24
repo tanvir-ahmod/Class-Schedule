@@ -1,5 +1,7 @@
 package com.example.shoukhin.classroutine;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,6 +98,37 @@ public class WriteNotification extends AppCompatActivity {
             mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notice Board");
             mFirebaseDatabase.child("notice").setValue(notification);
             //Log.d("tag", "pinned");
+        }
+
+        else if(id == R.id.write_notification_delete) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(
+                    WriteNotification.this);
+            alert.setCancelable(false);
+            alert.setTitle("Alert!!");
+            alert.setMessage("Are you sure to delete record?");
+            alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    FirebaseDatabase.getInstance().getReference("Notification").child(storedKey).removeValue();
+                    Toast.makeText(WriteNotification.this, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    finish();
+
+                }
+            });
+            alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alertDialog = alert.create();
+
+            alertDialog.show();
         }
 
         return super.onOptionsItemSelected(item);

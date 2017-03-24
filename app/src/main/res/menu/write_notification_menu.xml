@@ -12,4 +12,9 @@
         android:orderInCategory="100"
         android:title="pinned"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/write_notification_delete"
+        android:orderInCategory="100"
+        android:title="delete"
+        app:showAsAction="always" />
 </menu>

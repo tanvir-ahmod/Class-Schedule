@@ -75,6 +75,9 @@ public class ViewRoutine extends AppCompatActivity
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //clear all data and get new one
+                allData.clear();
                 //loop through the child
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     RoutineStructure routine = postSnapshot.getValue(RoutineStructure.class);
