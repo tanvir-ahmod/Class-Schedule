@@ -257,18 +257,8 @@ public class ViewRoutine extends AppCompatActivity
         if (id == R.id.view_notification) {
             startActivity(new Intent(ViewRoutine.this, ViewNotification.class));
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } else if (id == R.id.write_data) {
-            startActivity(new Intent(ViewRoutine.this, WriteRoutine.class));
-        } else if (id == R.id.write_notification) {
-            startActivity(new Intent(ViewRoutine.this, WriteNotification.class));
+        }  else if (id == R.id.admin_zone) {
+            startActivity(new Intent(ViewRoutine.this, AdminZone.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

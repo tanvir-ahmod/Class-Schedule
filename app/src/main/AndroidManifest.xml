@@ -27,7 +27,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".WriteNotification" />
-        <activity android:name=".ViewNotification"></activity>
+        <activity android:name=".ViewNotification" />
+        <activity
+            android:name=".AdminZone"
+            android:label="@string/title_activity_admin_zone"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
