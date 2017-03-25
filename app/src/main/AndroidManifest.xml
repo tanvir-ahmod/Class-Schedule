@@ -15,7 +15,7 @@
         <activity android:name=".MainActivity" />
 
         <service
-            android:name=".MyService"
+            android:name=".RoutineService"
             android:enabled="true"
             android:exported="true" />
 

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //startService(new Intent(getBaseContext(), MyService.class));
+        //startService(new Intent(getBaseContext(), RoutineService.class));
 
         mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("asd");
 

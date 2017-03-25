@@ -3,9 +3,6 @@ package com.example.shoukhin.classroutine;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,11 +16,9 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +39,7 @@ public class ViewRoutine extends AppCompatActivity
     private static ArrayList<RoutineStructure> allData;
     private static ArrayList<RoutineStructure> currentDayData;
 
-    private DatabaseReference mFirebaseDatabase;
+    private static DatabaseReference mFirebaseDatabase;
 
     private static String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
 
@@ -119,8 +114,6 @@ public class ViewRoutine extends AppCompatActivity
                     startActivity(intent);
                 }
 
-
-
             }
         });
 
@@ -164,9 +157,15 @@ public class ViewRoutine extends AppCompatActivity
     }
 
     private void initialize() {
+        //setting offline storage
+        if(mFirebaseDatabase == null) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            database.setPersistenceEnabled(true);
+            mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
 
-        //service for notification given by cr
-        startService(new Intent(getBaseContext(), MyService.class));
+        }
+        //service for notification given by admin
+        startService(new Intent(getBaseContext(), RoutineService.class));
 
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();
@@ -177,11 +176,10 @@ public class ViewRoutine extends AppCompatActivity
             cuurrentDayPosition = 0;
 
         currentDayTbx = (TextView) findViewById(R.id.viewDayTBx);
+        currentDayTbx.setText(dayArray[cuurrentDayPosition]);
 
         nextDay = (ImageButton) findViewById(R.id.viewNextDayIbtn);
         previousDay = (ImageButton) findViewById(R.id.viewPreviousDayIbtn);
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
 
         viewRoutine = (ListView) findViewById(R.id.viewRoutine);
         viewRoutine.setOnTouchListener(new OnSwipeTouchListener(this)); //adding swipe listener to listview
