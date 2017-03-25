@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,7 +40,9 @@ public class WriteRoutine extends AppCompatActivity {
     boolean isEditable = false;
     String storedKey;
 
-    private String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
+    FirebaseAuth auth;
+
+    private String[] dayArray = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
     Button save, delete;
 
@@ -46,6 +50,13 @@ public class WriteRoutine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_routine);
+
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) {
+            // User is not logged in
+            Toast.makeText(this, "Please Login first!", Toast.LENGTH_SHORT);
+            finish();
+        }
 
         initialize();
 
@@ -207,7 +218,14 @@ public class WriteRoutine extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         position = calendar.get(Calendar.DAY_OF_WEEK);
-        day.setText(dayArray[position]);
+
+        //Log.d("tag", position + "");
+
+        //Day will be saturday
+        if(position == 7)
+            position = 0;
+
+        //day.setText(dayArray[position]);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
     }

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ public class AdminAuth extends AppCompatActivity {
     Button login;
 
     private FirebaseAuth auth;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class AdminAuth extends AppCompatActivity {
 
         emailEdtx = (EditText) findViewById(R.id.email_edtx);
         passwordEdtx = (EditText) findViewById(R.id.password_edtx);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         login = (Button) findViewById(R.id.login_button);
 
@@ -59,12 +62,15 @@ public class AdminAuth extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                progressBar.setVisibility(View.VISIBLE);
 
                 //authenticate user
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(AdminAuth.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                progressBar.setVisibility(View.GONE);
 
                                 if (!task.isSuccessful()) {
 

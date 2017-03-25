@@ -23,7 +23,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +54,8 @@ public class ViewRoutine extends AppCompatActivity
 
     ImageButton nextDay, previousDay;
 
+    FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +82,7 @@ public class ViewRoutine extends AppCompatActivity
 
                 //clear all data and get new one
                 allData.clear();
+                currentDayData.clear();
                 //loop through the child
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     RoutineStructure routine = postSnapshot.getValue(RoutineStructure.class);
@@ -103,11 +108,18 @@ public class ViewRoutine extends AppCompatActivity
         viewRoutine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ViewRoutine.this, WriteRoutine.class);
 
-                RoutineStructure routine = currentDayData.get(position);
-                intent.putExtra("routine", routine);
-                startActivity(intent);
+                auth = FirebaseAuth.getInstance();
+                if (auth.getCurrentUser() != null) {
+                    // User is not logged in, he can modify data
+                    Intent intent = new Intent(ViewRoutine.this, WriteRoutine.class);
+
+                    RoutineStructure routine = currentDayData.get(position);
+                    intent.putExtra("routine", routine);
+                    startActivity(intent);
+                }
+
+
 
             }
         });
@@ -159,6 +171,10 @@ public class ViewRoutine extends AppCompatActivity
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();
         cuurrentDayPosition = calendar.get(Calendar.DAY_OF_WEEK);
+
+        //Day will be saturday
+        if(cuurrentDayPosition == 7)
+            cuurrentDayPosition = 0;
 
         currentDayTbx = (TextView) findViewById(R.id.viewDayTBx);
 

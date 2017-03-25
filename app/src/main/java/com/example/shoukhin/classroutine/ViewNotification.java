@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +35,8 @@ public class ViewNotification extends AppCompatActivity {
     private ArrayList<NotificationAndPinnedPost> notifications;
 
     private ListView viewNotification;
+    FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +88,16 @@ public class ViewNotification extends AppCompatActivity {
         viewNotification.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NotificationAndPinnedPost notification = notifications.get(position);
 
-                Intent intent = new Intent(ViewNotification.this, WriteNotification.class);
-                intent.putExtra("notification", notification);
-                startActivity(intent);
+                auth = FirebaseAuth.getInstance();
+                if (auth.getCurrentUser() != null) {
+                    // User is not logged in, he can modify data
+                    NotificationAndPinnedPost notification = notifications.get(position);
+
+                    Intent intent = new Intent(ViewNotification.this, WriteNotification.class);
+                    intent.putExtra("notification", notification);
+                    startActivity(intent);
+                }
             }
         });
 
