@@ -258,7 +258,7 @@ public class ViewRoutine extends AppCompatActivity
             startActivity(new Intent(ViewRoutine.this, ViewNotification.class));
 
         }  else if (id == R.id.admin_zone) {
-            startActivity(new Intent(ViewRoutine.this, AdminZone.class));
+            startActivity(new Intent(ViewRoutine.this, AdminAuth.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
