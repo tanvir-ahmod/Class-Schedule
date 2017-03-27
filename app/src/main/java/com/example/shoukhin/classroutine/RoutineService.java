@@ -18,21 +18,25 @@ import com.google.firebase.database.ValueEventListener;
 public class RoutineService extends Service {
 
     private DatabaseReference mFirebaseDatabase, pinnedPost;
+    public static boolean FIRST_TIME_OPEN = false;
+
     public RoutineService() {
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        mFirebaseDatabase =  FirebaseDatabase.getInstance().getReference("Notification");
-        pinnedPost =  FirebaseDatabase.getInstance().getReference("Notice Board");
+        mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notification");
+        pinnedPost = FirebaseDatabase.getInstance().getReference("Notice Board");
 
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    showNotification("Notice about class!","tap to view");
+                //if (FIRST_TIME_OPEN == false)
+                    showNotification("Notice about class!", "tap to view");
+
 
             }
 
@@ -40,12 +44,15 @@ public class RoutineService extends Service {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
 
         pinnedPost.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                showNotification("Pinned post updated","tap to view");
+               // if (FIRST_TIME_OPEN == false)
+                    showNotification("Pinned post updated", "tap to view");
+
             }
 
             @Override
@@ -55,13 +62,10 @@ public class RoutineService extends Service {
         });
 
 
-
-
-            return START_STICKY;
+        return START_STICKY;
     }
 
-    private void showNotification(String message1, String messege2)
-    {
+    private void showNotification(String message1, String messege2) {
         Intent intnt = new Intent(RoutineService.this, ViewNotification.class);
 
         PendingIntent pIntent = PendingIntent.getActivity(RoutineService.this, 0, intnt, 0);
@@ -77,7 +81,7 @@ public class RoutineService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-       return null;
+        return null;
     }
 
     @Override

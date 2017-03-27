@@ -1,8 +1,10 @@
 package com.example.shoukhin.classroutine;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -157,6 +159,10 @@ public class ViewRoutine extends AppCompatActivity
     }
 
     private void initialize() {
+
+        //First time open, no need to show notification
+        RoutineService.FIRST_TIME_OPEN = true;
+
         //setting offline storage
         if(mFirebaseDatabase == null) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -165,7 +171,12 @@ public class ViewRoutine extends AppCompatActivity
 
         }
         //service for notification given by admin
-        startService(new Intent(getBaseContext(), RoutineService.class));
+        if(!isMyServiceRunning(RoutineService.class)) {
+            startService(new Intent(getBaseContext(), RoutineService.class));
+            Log.d("tag", "not running");
+        }
+        else
+        Log.d("tag", "running");
 
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();
@@ -278,5 +289,16 @@ public class ViewRoutine extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //to check if a service already running or not
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
