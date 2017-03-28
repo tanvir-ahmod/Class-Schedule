@@ -291,6 +291,7 @@ public class ViewRoutine extends AppCompatActivity
         return true;
     }
 
+
     //to check if a service already running or not
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
