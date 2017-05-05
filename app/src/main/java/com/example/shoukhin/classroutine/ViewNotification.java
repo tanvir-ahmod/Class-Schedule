@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -36,7 +38,6 @@ public class ViewNotification extends AppCompatActivity {
     TextView pinnedTbx;
 
     private BaseAdapter adapter;
-
     private ArrayList<NotificationAndPinnedPost> notifications;
 
     private ListView viewNotification;
@@ -47,6 +48,7 @@ public class ViewNotification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_notification);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initialize();
 
@@ -213,5 +215,17 @@ public class ViewNotification extends AppCompatActivity {
             month = months[num];
         }
         return month;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
