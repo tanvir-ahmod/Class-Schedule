@@ -20,9 +20,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ViewNotification extends AppCompatActivity {
 
@@ -74,6 +79,7 @@ public class ViewNotification extends AppCompatActivity {
                     notifications.add(notification);
                 }
 
+                sortByDate();
                 adapter.notifyDataSetChanged();
 
 
@@ -101,6 +107,34 @@ public class ViewNotification extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void sortByDate() {
+
+        Collections.sort(notifications, new Comparator<NotificationAndPinnedPost>() {
+            @Override
+            public int compare(NotificationAndPinnedPost lhs, NotificationAndPinnedPost rhs) {
+                DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+                /*String dateLHS = lhs.getTime();
+                String dateRHS = rhs.getTime();*/
+
+                Calendar calendarRHD = Calendar.getInstance();
+                Calendar calendarLHS = Calendar.getInstance();
+                try {
+                    calendarLHS.setTimeInMillis(lhs.getTime());
+                    calendarRHD.setTimeInMillis(rhs.getTime());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                return calendarRHD.compareTo(calendarLHS);
+            }
+
+        });
 
     }
 
