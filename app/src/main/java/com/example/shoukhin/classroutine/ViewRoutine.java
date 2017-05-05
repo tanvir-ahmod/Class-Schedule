@@ -49,7 +49,6 @@ public class ViewRoutine extends AppCompatActivity
 
     private static TextView currentDayTbx;
 
-    ImageButton nextDay, previousDay;
 
     FirebaseAuth auth;
 
@@ -115,24 +114,6 @@ public class ViewRoutine extends AppCompatActivity
                     intent.putExtra("routine", routine);
                     startActivity(intent);
                 }
-
-            }
-        });
-
-
-        nextDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cuurrentDayPosition++;
-                showCurrentDayRoutine();
-            }
-        });
-
-        previousDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cuurrentDayPosition--;
-                showCurrentDayRoutine();
             }
         });
     }
@@ -188,9 +169,6 @@ public class ViewRoutine extends AppCompatActivity
 
         currentDayTbx = (TextView) findViewById(R.id.viewDayTBx);
         currentDayTbx.setText(dayArray[cuurrentDayPosition]);
-
-        nextDay = (ImageButton) findViewById(R.id.viewNextDayIbtn);
-        previousDay = (ImageButton) findViewById(R.id.viewPreviousDayIbtn);
 
         viewRoutine = (ListView) findViewById(R.id.viewRoutine);
         viewRoutine.setOnTouchListener(new OnSwipeTouchListener(this)); //adding swipe listener to listview
