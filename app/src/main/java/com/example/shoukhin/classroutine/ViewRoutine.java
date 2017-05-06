@@ -29,8 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ViewRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -145,26 +149,25 @@ public class ViewRoutine extends AppCompatActivity
         RoutineService.FIRST_TIME_OPEN = true;
 
         //setting offline storage
-        if(mFirebaseDatabase == null) {
+        if (mFirebaseDatabase == null) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             database.setPersistenceEnabled(true);
             mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
 
         }
         //service for notification given by admin
-        if(!isMyServiceRunning(RoutineService.class)) {
+        if (!isMyServiceRunning(RoutineService.class)) {
             startService(new Intent(getBaseContext(), RoutineService.class));
             Log.d("tag", "not running");
-        }
-        else
-        Log.d("tag", "running");
+        } else
+            Log.d("tag", "running");
 
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();
         cuurrentDayPosition = calendar.get(Calendar.DAY_OF_WEEK);
 
         //Day will be saturday
-        if(cuurrentDayPosition == 7)
+        if (cuurrentDayPosition == 7)
             cuurrentDayPosition = 0;
 
         currentDayTbx = (TextView) findViewById(R.id.viewDayTBx);
@@ -213,13 +216,11 @@ public class ViewRoutine extends AppCompatActivity
                 fromTime.setText(currentDayData.get(position).getStartTime());
                 toTime.setText(currentDayData.get(position).getEndTime());
 
-
                 return convertView;
             }
         };
 
         viewRoutine.setAdapter(adapter);
-
     }
 
     @Override
@@ -260,7 +261,7 @@ public class ViewRoutine extends AppCompatActivity
         if (id == R.id.view_notification) {
             startActivity(new Intent(ViewRoutine.this, ViewNotification.class));
 
-        }  else if (id == R.id.admin_zone) {
+        } else if (id == R.id.admin_zone) {
             startActivity(new Intent(ViewRoutine.this, AdminAuth.class));
         }
 
@@ -280,4 +281,32 @@ public class ViewRoutine extends AppCompatActivity
         }
         return false;
     }
+
+    /*private void sortByDate(ArrayList<RoutineStructure> sortedRoutine) {
+
+        Collections.sort(sortedRoutine, new Comparator<RoutineStructure>() {
+            @Override
+            public int compare(NotificationAndPinnedPost lhs, NotificationAndPinnedPost rhs) {
+                DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+                *//*String dateLHS = lhs.getTime();
+                String dateRHS = rhs.getTime();*//*
+
+                Calendar calendarRHD = Calendar.getInstance();
+                Calendar calendarLHS = Calendar.getInstance();
+                try {
+                    calendarLHS.setTimeInMillis(lhs.getTime());
+                    calendarRHD.setTimeInMillis(rhs.getTime());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                return calendarRHD.compareTo(calendarLHS);
+            }
+
+        });
+
+    }*/
 }
