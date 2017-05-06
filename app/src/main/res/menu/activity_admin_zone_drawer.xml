@@ -4,13 +4,13 @@
     <group android:checkableBehavior="single">
     <item
         android:id="@+id/write_notification"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="write Notification" />
+        android:icon="@drawable/addnotification1"
+        android:title="Add Notification" />
 
     <item
         android:id="@+id/write_data"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="Write Data" />
+        android:icon="@drawable/addroutine"
+        android:title="Add Routine" />
     </group>
 
 </menu>
