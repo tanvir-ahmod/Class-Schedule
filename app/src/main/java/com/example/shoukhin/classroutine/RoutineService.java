@@ -83,7 +83,7 @@ public class RoutineService extends Service {
         PendingIntent pIntent = PendingIntent.getActivity(RoutineService.this, 0, intnt, 0);
         Notification n = new Notification.Builder(RoutineService.this)
                 .setContentTitle(message1).setContentText(messege2)
-                .setContentIntent(pIntent).setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                .setContentIntent(pIntent).setSmallIcon(R.drawable.addnotification)
                 .build();
 
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
