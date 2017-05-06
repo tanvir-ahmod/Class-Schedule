@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 public class ViewRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -137,6 +138,9 @@ public class ViewRoutine extends AppCompatActivity
                 currentDayData.add(allData.get(i));
             }
         }
+
+        //sorting routine data by time
+        sortByTime();
 
         currentDayTbx.setText(dayArray[cuurrentDayPosition]);
         adapter.notifyDataSetChanged();
@@ -282,31 +286,31 @@ public class ViewRoutine extends AppCompatActivity
         return false;
     }
 
-    /*private void sortByDate(ArrayList<RoutineStructure> sortedRoutine) {
+    //sorting the routine according to time
+    private static void sortByTime() {
 
-        Collections.sort(sortedRoutine, new Comparator<RoutineStructure>() {
+        Collections.sort(currentDayData, new Comparator<RoutineStructure>() {
             @Override
-            public int compare(NotificationAndPinnedPost lhs, NotificationAndPinnedPost rhs) {
-                DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            public int compare(RoutineStructure lhs, RoutineStructure rhs) {
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
 
-                *//*String dateLHS = lhs.getTime();
-                String dateRHS = rhs.getTime();*//*
+                String timeLHS = lhs.getStartTime();
+                String timeRHS = rhs.getStartTime();
 
                 Calendar calendarRHD = Calendar.getInstance();
                 Calendar calendarLHS = Calendar.getInstance();
                 try {
-                    calendarLHS.setTimeInMillis(lhs.getTime());
-                    calendarRHD.setTimeInMillis(rhs.getTime());
+                    calendarLHS.setTime(format.parse(timeLHS));
+                    calendarRHD.setTime(format.parse(timeRHS));
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-
-                return calendarRHD.compareTo(calendarLHS);
+                return calendarLHS.compareTo(calendarRHD);
             }
 
         });
 
-    }*/
+    }
 }

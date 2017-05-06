@@ -2,6 +2,7 @@ package com.example.shoukhin.classroutine;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+
 import java.util.Calendar;
 
 import android.content.DialogInterface;
@@ -28,7 +29,7 @@ public class WriteRoutine extends AppCompatActivity {
 
     ImageButton nextDay, previousDay;
 
-    EditText  courseName, courseCode, roomNumber;
+    EditText courseName, courseCode, roomNumber;
     TextView fromTime, toTime, day;
 
     private DatabaseReference mFirebaseDatabase;
@@ -61,8 +62,7 @@ public class WriteRoutine extends AppCompatActivity {
         initialize();
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null)
-        {
+        if (extras != null) {
             RoutineStructure routine = (RoutineStructure) extras.get("routine");
             courseName.setText(routine.getCourseName());
             courseCode.setText(routine.getCourseCode());
@@ -109,7 +109,7 @@ public class WriteRoutine extends AppCompatActivity {
             public void onClick(View v) {
                 position++;
 
-                if(position >= dayArray.length)
+                if (position >= dayArray.length)
                     position = 0;
 
                 day.setText(dayArray[position]);
@@ -121,7 +121,7 @@ public class WriteRoutine extends AppCompatActivity {
             public void onClick(View v) {
                 position--;
 
-                if(position < 0)
+                if (position < 0)
                     position = dayArray.length - 1;
 
                 day.setText(dayArray[position]);
@@ -144,18 +144,16 @@ public class WriteRoutine extends AppCompatActivity {
                 //saving to firebase database
 
                 //if editable, just update the data
-                if(isEditable == true)
-                {
+                if (isEditable == true) {
                     key = storedKey;
-                }
-                else {
+                } else {
                     key = mFirebaseDatabase.push().getKey();
                     //isEditable = true; //next save will just overwrite the data
 
                 }
 
                 //save it
-               mFirebaseDatabase.child(key).setValue(routine);
+                mFirebaseDatabase.child(key).setValue(routine);
                 Toast.makeText(WriteRoutine.this, "saved Successfully", Toast.LENGTH_SHORT).show();
                 finish();
 
@@ -219,10 +217,8 @@ public class WriteRoutine extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         position = calendar.get(Calendar.DAY_OF_WEEK);
 
-        //Log.d("tag", position + "");
-
         //Day will be saturday
-        if(position == 7)
+        if (position == 7)
             position = 0;
 
         //day.setText(dayArray[position]);
@@ -270,10 +266,9 @@ public class WriteRoutine extends AppCompatActivity {
         } else
             timeSet = "AM";
 
-        if(hours > 0 && hours < 10){
+        if (hours > 0 && hours < 10) {
             hourString = "0" + String.valueOf(hours);
-        }
-        else
+        } else
             hourString = String.valueOf(hours);
 
         String minutes = "";

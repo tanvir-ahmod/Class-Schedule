@@ -9,13 +9,13 @@ import java.io.Serializable;
 public class RoutineStructure implements Serializable {
 
 
-    public String roomNumber;
-    public String key;
-    public String day;
-    public String courseName;
-    public String courseCode;
-    public String startTime;
-    public String endTime;
+    private String roomNumber;
+    private String key;
+    private String day;
+    private String courseName;
+    private String courseCode;
+    private String startTime;
+    private String endTime;
 
     public void setKey(String key) {
         this.key = key;
