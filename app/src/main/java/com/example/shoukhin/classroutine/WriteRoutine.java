@@ -68,6 +68,7 @@ public class WriteRoutine extends AppCompatActivity {
             RoutineStructure routine = (RoutineStructure) extras.get("routine");
             courseName.setText(routine.getCourseName());
             courseCode.setText(routine.getCourseCode());
+            roomNumber.setText(routine.getRoomNumber());
             fromTime.setText(routine.getStartTime());
             toTime.setText(routine.getEndTime());
 
