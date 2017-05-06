@@ -22,7 +22,6 @@ public class RoutineStructure implements Serializable {
     }
 
     public String getRoomNumber() {
-
         return roomNumber;
     }
 

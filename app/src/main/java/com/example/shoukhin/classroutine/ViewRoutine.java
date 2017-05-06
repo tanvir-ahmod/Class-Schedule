@@ -166,9 +166,6 @@ public class ViewRoutine extends AppCompatActivity
 
     private void initialize() {
 
-        //First time open, no need to show notification
-        //RoutineService.FIRST_TIME_OPEN = true;
-
         //setting offline storage
         if (mFirebaseDatabase == null) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -231,9 +228,11 @@ public class ViewRoutine extends AppCompatActivity
                 TextView fromTime = (TextView) convertView.findViewById(R.id.listviewFromtimetbx);
                 TextView toTime = (TextView) convertView.findViewById(R.id.listviewTotimetbx);
 
+                String tempRoomNo = "Room No : "+currentDayData.get(position).getRoomNumber();
+
                 courseName.setText(currentDayData.get(position).getCourseName());
                 courseCode.setText(currentDayData.get(position).getCourseCode());
-                roomNumber.setText(currentDayData.get(position).getRoomNumber());
+                roomNumber.setText(tempRoomNo);
                 fromTime.setText(currentDayData.get(position).getStartTime());
                 toTime.setText(currentDayData.get(position).getEndTime());
 
