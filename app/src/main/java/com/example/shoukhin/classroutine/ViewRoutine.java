@@ -160,11 +160,8 @@ public class ViewRoutine extends AppCompatActivity
 
         }
         //service for notification given by admin
-        if (!isMyServiceRunning(RoutineService.class)) {
-            startService(new Intent(getBaseContext(), RoutineService.class));
-            Log.d("tag", "not running");
-        } else
-            Log.d("tag", "running");
+        startService(new Intent(getBaseContext(), RoutineService.class));
+
 
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();

@@ -34,10 +34,9 @@ public class RoutineService extends Service {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //if (FIRST_TIME_OPEN == false)
+                if (!FIRST_TIME_OPEN) {
                     showNotification("Notice about class!", "tap to view");
-
-
+                } else FIRST_TIME_OPEN = false;
             }
 
             @Override
@@ -50,8 +49,12 @@ public class RoutineService extends Service {
         pinnedPost.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               // if (FIRST_TIME_OPEN == false)
+                if (!FIRST_TIME_OPEN) {
                     showNotification("Pinned post updated", "tap to view");
+                } else {
+                    FIRST_TIME_OPEN = false;
+
+                }
 
             }
 
@@ -87,6 +90,5 @@ public class RoutineService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("tag", "service stopped");
     }
 }
