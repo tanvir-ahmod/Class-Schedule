@@ -34,6 +34,7 @@ public class WriteNotification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_notification);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         text = (EditText) findViewById(R.id.write_noti_edtx);
 
@@ -46,7 +47,6 @@ public class WriteNotification extends AppCompatActivity {
             isEditable = true;
 
             storedKey = notification.getKey();
-
         }
 
         auth = FirebaseAuth.getInstance();
@@ -54,7 +54,6 @@ public class WriteNotification extends AppCompatActivity {
             // User is not logged in
             Toast.makeText(this, "Please Login first!", Toast.LENGTH_SHORT);
             finish();
-
         }
 
     }
@@ -89,11 +88,9 @@ public class WriteNotification extends AppCompatActivity {
             else {
                 String key = mFirebaseDatabase.push().getKey();
                 mFirebaseDatabase.child(key).setValue(notification);
-
-
             }
 
-            Toast.makeText(WriteNotification.this, "saved Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(WriteNotification.this, "Saved Successfully", Toast.LENGTH_SHORT).show();
             finish();
 
             //Log.d("tag","saved");
@@ -109,7 +106,7 @@ public class WriteNotification extends AppCompatActivity {
 
             mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notice Board");
             mFirebaseDatabase.child("notice").setValue(notification);
-            //Log.d("tag", "pinned");
+            Toast.makeText(WriteNotification.this, "Saved As Pinned Post", Toast.LENGTH_SHORT).show();
         }
 
         else if(id == R.id.write_notification_delete) {
@@ -139,10 +136,15 @@ public class WriteNotification extends AppCompatActivity {
             });
 
             AlertDialog alertDialog = alert.create();
-
             alertDialog.show();
+        }
+
+        else if(id == android.R.id.home) {
+                finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

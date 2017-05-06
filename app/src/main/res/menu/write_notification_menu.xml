@@ -5,16 +5,20 @@
         android:id="@+id/write_notification_save"
         android:orderInCategory="100"
         android:title="save"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:icon="@drawable/saveicon"/>
 
     <item
         android:id="@+id/write_notification_pinned"
         android:orderInCategory="100"
         android:title="pinned"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:icon="@drawable/pinnedicon"
+        />
     <item
         android:id="@+id/write_notification_delete"
         android:orderInCategory="100"
         android:title="delete"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:icon="@drawable/deleteicon"/>
 </menu>

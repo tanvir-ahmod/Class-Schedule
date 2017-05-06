@@ -11,31 +11,13 @@
     android:orientation="vertical"
     tools:context="com.example.shoukhin.classroutine.WriteNotification">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:text="Modified :"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/write_noti_date_tbx"
-            android:layout_weight="1" />
-    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
-        android:text=""
         android:ems="10"
+        android:hint="Write Notification Here"
         android:id="@+id/write_noti_edtx" />
 </LinearLayout>
