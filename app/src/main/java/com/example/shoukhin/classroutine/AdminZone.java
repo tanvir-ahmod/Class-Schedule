@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,12 +28,17 @@ public class AdminZone extends AppCompatActivity
     private FirebaseAuth auth;
     private static DatabaseReference mFirebaseDatabase;
 
+    TextView nameTbx, rollTbx;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_zone);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        nameTbx = (TextView) findViewById(R.id.admin_name_tbx);
+        rollTbx = (TextView) findViewById(R.id.admin_roll_tbx);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,7 +52,6 @@ public class AdminZone extends AppCompatActivity
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
             // User is not logged in
-
             finish();
         }
 
@@ -54,11 +59,11 @@ public class AdminZone extends AppCompatActivity
         mFirebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String name = dataSnapshot.child("name").getValue(String.class);
-                String roll = dataSnapshot.child("roll").getValue(String.class);
+                String name = dataSnapshot.child("Name").getValue(String.class);
+                String roll = dataSnapshot.child("Roll").getValue(String.class);
 
-                Log.d("tag", name + " " + roll);
-
+                nameTbx.setText(name);
+                rollTbx.setText(roll);
             }
 
             @Override

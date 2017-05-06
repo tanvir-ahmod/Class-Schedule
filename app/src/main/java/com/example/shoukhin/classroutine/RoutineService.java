@@ -18,9 +18,18 @@ import com.google.firebase.database.ValueEventListener;
 public class RoutineService extends Service {
 
     private DatabaseReference mFirebaseDatabase, pinnedPost;
-    public static boolean FIRST_TIME_OPEN = false;
+    private static boolean FIRST_TIME_OPEN1 = true;
+    private static boolean FIRST_TIME_OPEN2 = true;
 
     public RoutineService() {
+
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        FIRST_TIME_OPEN1 = true;
+        FIRST_TIME_OPEN2 = true;
     }
 
     @Override
@@ -29,14 +38,15 @@ public class RoutineService extends Service {
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notification");
         pinnedPost = FirebaseDatabase.getInstance().getReference("Notice Board");
 
+        //Log.d("tag", "on start " + i  + FIRST_TIME_OPEN);
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (!FIRST_TIME_OPEN) {
+                if (!FIRST_TIME_OPEN1) {
                     showNotification("Notice about class!", "tap to view");
-                } else FIRST_TIME_OPEN = false;
+                } else FIRST_TIME_OPEN1 = false;
             }
 
             @Override
@@ -49,13 +59,12 @@ public class RoutineService extends Service {
         pinnedPost.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (!FIRST_TIME_OPEN) {
+
+                if (!FIRST_TIME_OPEN2) {
                     showNotification("Pinned post updated", "tap to view");
                 } else {
-                    FIRST_TIME_OPEN = false;
-
+                    FIRST_TIME_OPEN2 = false;
                 }
-
             }
 
             @Override

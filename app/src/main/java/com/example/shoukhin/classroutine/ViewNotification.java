@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 public class ViewNotification extends AppCompatActivity {
 
@@ -81,10 +82,9 @@ public class ViewNotification extends AppCompatActivity {
                     notifications.add(notification);
                 }
 
+                //sorting data by date
                 sortByDate();
                 adapter.notifyDataSetChanged();
-
-
             }
 
             @Override
@@ -117,10 +117,6 @@ public class ViewNotification extends AppCompatActivity {
         Collections.sort(notifications, new Comparator<NotificationAndPinnedPost>() {
             @Override
             public int compare(NotificationAndPinnedPost lhs, NotificationAndPinnedPost rhs) {
-                DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-
-                /*String dateLHS = lhs.getTime();
-                String dateRHS = rhs.getTime();*/
 
                 Calendar calendarRHD = Calendar.getInstance();
                 Calendar calendarLHS = Calendar.getInstance();

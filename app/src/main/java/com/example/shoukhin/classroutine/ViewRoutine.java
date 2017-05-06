@@ -51,6 +51,7 @@ public class ViewRoutine extends AppCompatActivity
     private static String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
 
     public static int cuurrentDayPosition;
+    ImageButton nextDay, previousDay;
 
     private static TextView currentDayTbx;
 
@@ -121,6 +122,22 @@ public class ViewRoutine extends AppCompatActivity
                 }
             }
         });
+
+        nextDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cuurrentDayPosition++;
+                showCurrentDayRoutine();
+            }
+        });
+
+        previousDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cuurrentDayPosition--;
+                showCurrentDayRoutine();
+            }
+        });
     }
 
     public static void showCurrentDayRoutine() {
@@ -150,7 +167,7 @@ public class ViewRoutine extends AppCompatActivity
     private void initialize() {
 
         //First time open, no need to show notification
-        RoutineService.FIRST_TIME_OPEN = true;
+        //RoutineService.FIRST_TIME_OPEN = true;
 
         //setting offline storage
         if (mFirebaseDatabase == null) {
@@ -173,6 +190,9 @@ public class ViewRoutine extends AppCompatActivity
 
         currentDayTbx = (TextView) findViewById(R.id.viewDayTBx);
         currentDayTbx.setText(dayArray[cuurrentDayPosition]);
+
+        nextDay = (ImageButton) findViewById(R.id.viewNextDayIbtn);
+        previousDay = (ImageButton) findViewById(R.id.viewPreviousDayIbtn);
 
         viewRoutine = (ListView) findViewById(R.id.viewRoutine);
         viewRoutine.setOnTouchListener(new OnSwipeTouchListener(this)); //adding swipe listener to listview
