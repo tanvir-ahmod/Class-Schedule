@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,7 @@ public class WriteRoutine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_routine);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
@@ -247,7 +249,6 @@ public class WriteRoutine extends AppCompatActivity {
             currentMinute = minute;
 
             updateText(hourOfDay, minute);
-
         }
     };
 
@@ -281,12 +282,21 @@ public class WriteRoutine extends AppCompatActivity {
         String aTime = new StringBuilder().append(hourString).append(':')
                 .append(minutes).append(" ").append(timeSet).toString();
 
-
         if (isFromTimeClicked == true) {
             fromTime.setText(aTime);
         } else if (isToTimeClicked == true) {
             toTime.setText(aTime);
         }
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

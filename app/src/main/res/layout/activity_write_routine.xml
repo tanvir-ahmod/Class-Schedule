@@ -5,120 +5,142 @@
     android:id="@+id/activity_write_routine"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context="com.example.shoukhin.classroutine.WriteRoutine">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            app:srcCompat="@drawable/previous"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent" android:id="@+id/addPreviousDayIbtn"
-            android:layout_weight="1" />
+            android:id="@+id/addPreviousDayIbtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/left1" />
 
         <TextView
-            android:text="Saturday"
-            android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:id="@+id/addDayTBx"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="Saturday"
             android:textAlignment="center"
-            android:layout_weight="1"/>
+            android:textSize="25sp" />
 
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            app:srcCompat="@drawable/next"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent"
             android:id="@+id/addNextDayIbtn"
-            android:layout_weight="1"/>
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/right1" />
 
     </LinearLayout>
 
     <EditText
+        android:id="@+id/addCourseNameEdtx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/addCourseNameEdtx"
-        android:hint="Course Name" />
+        android:hint="Course Name"
+        android:inputType="textPersonName" />
 
     <EditText
+        android:id="@+id/addCourseCodeEdtx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/addCourseCodeEdtx"
-        android:hint="Course Code" />
+        android:hint="Course Code"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/addRoomNumEdtx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Room Number"
+        android:inputType="textPersonName" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp" >
+        android:paddingBottom="20dp">
 
         <TextView
             android:id="@+id/addfromtbx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:textSize="17sp"
-            android:text="From" />
+            android:text="From"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/addfromtimetbx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
             android:padding="10dp"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/addtotbx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:textSize="17sp"
-            android:text="To" />
+            android:text="To"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/addtotimetbx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
             android:padding="10dp"
-            android:textSize="20sp"
-            android:typeface="serif"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
     </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/addRoomNumEdtx"
-        android:hint="Room Number" />
 
     <Button
+        android:id="@+id/saveRoutineBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="Save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/saveRoutineBtn" />
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <Button
-        android:text="Delete"
+        android:id="@+id/add_delete_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_delete_btn" />
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Delete"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
