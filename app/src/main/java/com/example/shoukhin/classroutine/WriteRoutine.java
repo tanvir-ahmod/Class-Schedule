@@ -76,6 +76,8 @@ public class WriteRoutine extends AppCompatActivity {
 
             storedKey = routine.getKey();
 
+            position = (int) extras.get("day");
+            day.setText(dayArray[position]);
             delete.setVisibility(View.VISIBLE); //delete button is visibled
         }
 
@@ -150,6 +152,7 @@ public class WriteRoutine extends AppCompatActivity {
                 if (isEditable == true) {
                     key = storedKey;
                 } else {
+                    //store as new data
                     key = mFirebaseDatabase.push().getKey();
                     //isEditable = true; //next save will just overwrite the data
 
@@ -224,7 +227,7 @@ public class WriteRoutine extends AppCompatActivity {
         if (position == 7)
             position = 0;
 
-        //day.setText(dayArray[position]);
+        day.setText(dayArray[position]);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
     }

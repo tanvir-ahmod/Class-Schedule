@@ -118,6 +118,7 @@ public class ViewRoutine extends AppCompatActivity
 
                     RoutineStructure routine = currentDayData.get(position);
                     intent.putExtra("routine", routine);
+                    intent.putExtra("day", cuurrentDayPosition);
                     startActivity(intent);
                 }
             }
