@@ -28,9 +28,10 @@
 
         <TextView
             android:id="@+id/view_noti_pin_tbx"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:padding="10dp"
             android:fontFamily="sans-serif"
             android:textSize="16sp" />
     </ScrollView>
@@ -41,7 +42,8 @@
         android:layout_height="wrap_content"
         android:text="Notifications:"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
 
     <ListView
         android:id="@+id/view_notification_listview"

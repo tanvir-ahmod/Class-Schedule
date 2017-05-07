@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <TextView
@@ -33,10 +33,11 @@
         android:id="@+id/noti_listview_post_tbx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:text="TextView"
+        android:padding="10dp"
         android:fontFamily="sans-serif-medium"
         />
 </LinearLayout>

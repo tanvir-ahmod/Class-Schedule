@@ -45,7 +45,7 @@ public class RoutineService extends Service {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if (!FIRST_TIME_OPEN1) {
-                    showNotification("Notice about class!", "tap to view");
+                    showNotification("Updated Notice About Class", "tap to view");
                 } else FIRST_TIME_OPEN1 = false;
             }
 
