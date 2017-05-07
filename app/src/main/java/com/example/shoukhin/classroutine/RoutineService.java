@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -81,9 +83,14 @@ public class RoutineService extends Service {
         Intent intnt = new Intent(RoutineService.this, ViewNotification.class);
 
         PendingIntent pIntent = PendingIntent.getActivity(RoutineService.this, 0, intnt, 0);
+
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+
         Notification n = new Notification.Builder(RoutineService.this)
                 .setContentTitle(message1).setContentText(messege2)
                 .setContentIntent(pIntent).setSmallIcon(R.drawable.addnotification)
+                .setSound(soundUri)
                 .build();
 
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
