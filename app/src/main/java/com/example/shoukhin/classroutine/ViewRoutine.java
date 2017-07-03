@@ -174,9 +174,6 @@ public class ViewRoutine extends AppCompatActivity
             mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
 
         }
-        //service for notification given by admin
-       // startService(new Intent(getBaseContext(), RoutineService.class));
-
 
         //getting today's day number of the week
         Calendar calendar = Calendar.getInstance();

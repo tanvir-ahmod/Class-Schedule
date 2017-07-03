@@ -6,19 +6,19 @@
         android:orderInCategory="100"
         android:title="save"
         app:showAsAction="always"
-        android:icon="@drawable/saveicon"/>
+        android:icon="@drawable/ic_save_white_18dp"/>
 
     <item
         android:id="@+id/write_notification_pinned"
         android:orderInCategory="100"
         android:title="pinned"
         app:showAsAction="always"
-        android:icon="@drawable/pinnedicon"
+        android:icon="@drawable/ic_star_rate_white_18dp"
         />
     <item
         android:id="@+id/write_notification_delete"
         android:orderInCategory="100"
         android:title="delete"
         app:showAsAction="always"
-        android:icon="@drawable/deleteicon"/>
+        android:icon="@drawable/ic_delete_black_24dp"/>
 </menu>

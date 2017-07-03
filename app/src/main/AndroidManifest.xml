@@ -12,10 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".RoutineService"
-            android:enabled="true"
-            android:exported="true" />
+
 
         <activity android:name=".WriteRoutine" />
         <activity
@@ -42,26 +39,11 @@
             android:name=".AdminZone"
             android:label="@string/title_activity_admin_zone"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AdminAuth" />
-
-        <receiver
-            android:name=".BootTimeService"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
+        <activity android:name=".AdminAuth">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shoukhin.classroutine.ViewRoutine" />
+        </activity>
 
         <service android:name=".NotificationService">
             <intent-filter>

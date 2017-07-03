@@ -16,7 +16,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pinned Posts:"
+        android:text="Pinned Post"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:padding="10dp"
-            android:text="TextView"
+            android:text=""
             android:textSize="16sp" />
     </ScrollView>
 
@@ -41,7 +41,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notifications:"
+        android:text="Notifications"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"/>
