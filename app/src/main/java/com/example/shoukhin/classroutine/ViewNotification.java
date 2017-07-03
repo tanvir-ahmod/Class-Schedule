@@ -108,8 +108,6 @@ public class ViewNotification extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void sortByDate() {
@@ -127,8 +125,6 @@ public class ViewNotification extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
                 return calendarRHD.compareTo(calendarLHS);
             }
 
@@ -139,12 +135,9 @@ public class ViewNotification extends AppCompatActivity {
     private void initialize() {
 
         pinnedTbx = (TextView) findViewById(R.id.view_noti_pin_tbx);
-
         viewNotification = (ListView) findViewById(R.id.view_notification_listview);
-
         mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notice Board").child("notice");
         notificationDatabase = FirebaseDatabase.getInstance().getReference("Notification");
-
         notifications = new ArrayList<>();
 
         adapter = new BaseAdapter() {
@@ -173,7 +166,6 @@ public class ViewNotification extends AppCompatActivity {
 
                 TextView post = (TextView) convertView.findViewById(R.id.noti_listview_post_tbx);
                 TextView time = (TextView) convertView.findViewById(R.id.noti_listview_time_tbx);
-
                 post.setText(notifications.get(position).getPost());
 
                 //calculation post arrival time
@@ -192,8 +184,6 @@ public class ViewNotification extends AppCompatActivity {
                     tempTime += "PM";
 
                 time.setText(tempTime);
-
-
                 return convertView;
             }
         };
