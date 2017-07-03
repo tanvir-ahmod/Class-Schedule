@@ -28,8 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteNotification" />
-        <activity android:name=".ViewNotification" />
+        <activity android:name=".WriteNotification">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shoukhin.classroutine.AdminZone" />
+        </activity>
+        <activity android:name=".ViewNotification">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shoukhin.classroutine.ViewRoutine" />
+        </activity>
         <activity
             android:name=".AdminZone"
             android:label="@string/title_activity_admin_zone"

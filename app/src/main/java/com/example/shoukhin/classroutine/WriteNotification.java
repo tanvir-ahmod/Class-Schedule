@@ -34,7 +34,7 @@ public class WriteNotification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_notification);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         text = (EditText) findViewById(R.id.write_noti_edtx);
 
@@ -52,7 +52,7 @@ public class WriteNotification extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
             // User is not logged in
-            Toast.makeText(this, "Please Login first!", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Please Login first!", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -106,7 +106,7 @@ public class WriteNotification extends AppCompatActivity {
 
             mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("Notice Board");
             mFirebaseDatabase.child("notice").setValue(notification);
-            Toast.makeText(WriteNotification.this, "Saved As Pinned Post", Toast.LENGTH_SHORT).show();
+            Toast.makeText(WriteNotification.this, "Saved as pinned post", Toast.LENGTH_SHORT).show();
         }
 
         else if(id == R.id.write_notification_delete) {

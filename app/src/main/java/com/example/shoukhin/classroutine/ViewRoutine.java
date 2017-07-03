@@ -48,7 +48,7 @@ public class ViewRoutine extends AppCompatActivity
 
     private static DatabaseReference mFirebaseDatabase;
 
-    private static String[] dayArray = {"Saturday", "Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday"};
+    private static String[] dayArray = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
     public static int cuurrentDayPosition;
     ImageButton nextDay, previousDay;
@@ -175,7 +175,7 @@ public class ViewRoutine extends AppCompatActivity
 
         }
         //service for notification given by admin
-        startService(new Intent(getBaseContext(), RoutineService.class));
+       // startService(new Intent(getBaseContext(), RoutineService.class));
 
 
         //getting today's day number of the week
@@ -271,18 +271,6 @@ public class ViewRoutine extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-    //to check if a service already running or not
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     //sorting the routine according to time

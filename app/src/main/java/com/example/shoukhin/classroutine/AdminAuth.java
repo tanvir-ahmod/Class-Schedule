@@ -76,7 +76,8 @@ public class AdminAuth extends AppCompatActivity {
 
                                 if (!task.isSuccessful()) {
 
-                                        Toast.makeText(AdminAuth.this, "Incorrect email or password!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AdminAuth.this, "Incorrect email or password!", Toast.LENGTH_LONG).show();
+
 
                                 } else {
                                     Intent intent = new Intent(AdminAuth.this, AdminZone.class);

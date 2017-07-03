@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "993638807167",
-    "firebase_url": "https://class-routine-ee62f.firebaseio.com",
-    "project_id": "class-routine-ee62f",
-    "storage_bucket": "class-routine-ee62f.appspot.com"
+    "project_number": "273281199695",
+    "firebase_url": "https://classroutine-fef53.firebaseio.com",
+    "project_id": "classroutine-fef53",
+    "storage_bucket": "classroutine-fef53.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:993638807167:android:9c91c7a4c9b74b62",
+        "mobilesdk_app_id": "1:273281199695:android:9c91c7a4c9b74b62",
         "android_client_info": {
           "package_name": "com.example.shoukhin.classroutine"
         }
       },
       "oauth_client": [
         {
-          "client_id": "993638807167-p070qnfp044rfj5vllhs17av7b33ncvq.apps.googleusercontent.com",
+          "client_id": "273281199695-9n60jaq2tjh1l1iuv778om8m9sh9vo5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shoukhin.classroutine",
+            "certificate_hash": "1f7cf53c39292cfe89b6be457db111a6d7f60da1"
+          }
+        },
+        {
+          "client_id": "273281199695-q6vdih1kt1pvid5jhr1sq489gtksfbvf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBg0hANC2E23wR4Hd6-IvlKfFOqX0MuMZg"
+          "current_key": "AIzaSyAbIxlqUU1o9HG--DZCgeRlO8dyG6yRwxc"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273281199695-q6vdih1kt1pvid5jhr1sq489gtksfbvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
