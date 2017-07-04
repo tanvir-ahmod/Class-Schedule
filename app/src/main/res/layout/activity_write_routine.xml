@@ -77,16 +77,18 @@
 
         <TextView
             android:id="@+id/addfromtbx"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:padding="10dp"
             android:text="From"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/addfromtimetbx"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:fontFamily="sans-serif-medium"
             android:padding="10dp"
             android:text="TextView"
@@ -95,16 +97,18 @@
 
         <TextView
             android:id="@+id/addtotbx"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:padding="10dp"
             android:text="To"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/addtotimetbx"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:fontFamily="sans-serif-medium"
             android:padding="10dp"
             android:text="TextView"
@@ -125,7 +129,7 @@
         android:shadowRadius="5"
         android:text="Save"
         android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <Button
@@ -140,7 +144,7 @@
         android:shadowRadius="5"
         android:text="Delete"
         android:textColor="#FFFFFF"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
 </LinearLayout>

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Arrived At :"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:fontFamily="sans-serif-condensed"/>
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="TextView"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:fontFamily="sans-serif-condensed" />
     </LinearLayout>
 

@@ -19,6 +19,10 @@
         android:text="Pinned Post"
         android:textSize="24sp"
         android:textStyle="bold" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -44,6 +48,11 @@
         android:text="Notifications"
         android:textSize="24sp"
         android:textStyle="bold"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
         android:layout_marginBottom="10dp"/>
 
     <ListView

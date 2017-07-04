@@ -23,6 +23,12 @@
         android:text="Current CR"
         android:textSize="34sp"
         android:textStyle="bold"
+       />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
         android:layout_marginBottom="20dp"/>
 
     <LinearLayout
@@ -45,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:fontFamily="sans-serif-medium"
-            android:text="TextView"
+            android:text=""
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -68,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:fontFamily="sans-serif-medium"
-            android:text="TextView"
+            android:text=""
             android:textSize="24sp" />
     </LinearLayout>
 </LinearLayout>
