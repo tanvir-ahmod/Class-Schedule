@@ -45,28 +45,26 @@
 
         <TextView
             android:id="@+id/listviewFromtbx"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:padding="10dp"
             android:text="From:"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/listviewFromtimetbx"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:fontFamily="sans-serif-medium"
             android:padding="10dp"
-            android:text="TextView"
+            android:text="textview"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/listviewTotbx"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="10dp"
             android:text="To:"
             android:textSize="16sp" />
@@ -74,9 +72,8 @@
 
         <TextView
             android:id="@+id/listviewTotimetbx"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:fontFamily="sans-serif-medium"
             android:padding="10dp"
             android:text="TextView"
