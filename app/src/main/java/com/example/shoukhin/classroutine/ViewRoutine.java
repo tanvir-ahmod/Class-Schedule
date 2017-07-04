@@ -2,8 +2,13 @@ package com.example.shoukhin.classroutine;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,9 +51,10 @@ public class ViewRoutine extends AppCompatActivity
     private static ArrayList<RoutineStructure> allData;
     private static ArrayList<RoutineStructure> currentDayData;
 
-    private static DatabaseReference mFirebaseDatabase;
+    private static DatabaseReference mFirebaseDatabase, updatedVersion;
 
     private static String[] dayArray = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    private final String LOGTAG = "tag";
 
     public static int cuurrentDayPosition;
     ImageButton nextDay, previousDay;
@@ -76,6 +82,7 @@ public class ViewRoutine extends AppCompatActivity
 
 
         initialize();
+        checkUpdate();
 
         //getting all routine data from firebase database
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
@@ -141,6 +148,49 @@ public class ViewRoutine extends AppCompatActivity
         });
     }
 
+    private void checkUpdate() {
+
+        PackageInfo pInfo;
+        long tempVerCode = 0;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            tempVerCode = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        final long verCode = tempVerCode;
+
+        //Log.d("tag", verCode + "");
+
+        if (updatedVersion == null) {
+            updatedVersion = FirebaseDatabase.getInstance().getReference("update");
+        }
+
+        updatedVersion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long dbVersionCode = (long) dataSnapshot.child("versionCode").getValue();
+                String downloadLink = (String) dataSnapshot.child("downloadLink").getValue();
+                String downloadMessage = (String) dataSnapshot.child("downloadMessage").getValue();
+
+                if(verCode< dbVersionCode)
+                {
+                    showDownloadDialogue(downloadMessage,downloadLink);
+                }
+
+              //  Log.d(LOGTAG, dbVersionCode + " " + verCode);
+              //  Log.d(LOGTAG, downloadMessage);
+              //  Log.d(LOGTAG, downloadLink);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public static void showCurrentDayRoutine() {
 
         if (cuurrentDayPosition >= dayArray.length)
@@ -163,6 +213,29 @@ public class ViewRoutine extends AppCompatActivity
         currentDayTbx.setText(dayArray[cuurrentDayPosition]);
         adapter.notifyDataSetChanged();
 
+    }
+
+    private void showDownloadDialogue(String downloadMessage, final String dbDownloadLink) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewRoutine.this);
+        builder.setTitle("Download new version");
+        builder.setMessage(downloadMessage);
+        builder.setCancelable(false);
+        builder.setPositiveButton("download", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dbDownloadLink));
+                if (browserIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(browserIntent);
+                }
+                finish();
+            }
+        });
+        builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void initialize() {
