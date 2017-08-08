@@ -12,8 +12,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity android:name=".WriteRoutine">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -60,6 +58,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".ViewDates"></activity>
     </application>
 
 </manifest>
