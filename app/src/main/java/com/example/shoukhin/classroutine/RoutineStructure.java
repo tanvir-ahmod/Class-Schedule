@@ -36,6 +36,10 @@ public class RoutineStructure implements Serializable {
         return roomNumber;
     }
 
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
     public String getKey() {
         return key;
     }
