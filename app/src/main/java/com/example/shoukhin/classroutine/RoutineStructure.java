@@ -1,6 +1,7 @@
 package com.example.shoukhin.classroutine;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 /**
  * Created by Shoukhin on 16-Mar-17.
@@ -16,6 +17,15 @@ public class RoutineStructure implements Serializable {
     private String courseCode;
     private String startTime;
     private String endTime;
+    private Calendar Date;
+
+    public Calendar getDate() {
+        return Date;
+    }
+
+    public void setDate(Calendar date) {
+        Date = date;
+    }
 
     public void setKey(String key) {
         this.key = key;
@@ -31,6 +41,10 @@ public class RoutineStructure implements Serializable {
 
     public String getDay() {
         return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getCourseName() {

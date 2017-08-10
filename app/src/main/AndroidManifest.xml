@@ -58,7 +58,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ViewDates"></activity>
+        <activity android:name=".ViewDates">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shoukhin.classroutine.ViewRoutine" />
+        </activity>
     </application>
 
 </manifest>

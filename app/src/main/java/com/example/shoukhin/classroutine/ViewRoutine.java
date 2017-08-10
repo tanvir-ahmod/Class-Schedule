@@ -53,8 +53,8 @@ public class ViewRoutine extends AppCompatActivity
 
     private static DatabaseReference mFirebaseDatabase, updatedVersion;
 
-    private static String[] dayArray = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-    private final String LOGTAG = "tag";
+    public static String[] dayArray = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    public static final String LOGTAG = "tag";
 
     public static int cuurrentDayPosition;
     ImageButton nextDay, previousDay;
@@ -127,6 +127,12 @@ public class ViewRoutine extends AppCompatActivity
                     intent.putExtra("routine", routine);
                     intent.putExtra("day", cuurrentDayPosition);
                     startActivity(intent);
+                } else {
+                    RoutineStructure routine = currentDayData.get(position);
+                    Intent intent = new Intent(ViewRoutine.this, ViewDates.class);
+                    intent.putExtra("allData", allData);
+                    intent.putExtra("selectedRoutine", routine);
+                    startActivity(intent);
                 }
             }
         });
@@ -173,14 +179,13 @@ public class ViewRoutine extends AppCompatActivity
                 String downloadLink = (String) dataSnapshot.child("downloadLink").getValue();
                 String downloadMessage = (String) dataSnapshot.child("downloadMessage").getValue();
 
-                if(verCode< dbVersionCode)
-                {
-                    showDownloadDialogue(downloadMessage,downloadLink);
+                if (verCode < dbVersionCode) {
+                    showDownloadDialogue(downloadMessage, downloadLink);
                 }
 
-              //  Log.d(LOGTAG, dbVersionCode + " " + verCode);
-              //  Log.d(LOGTAG, downloadMessage);
-              //  Log.d(LOGTAG, downloadLink);
+                //  Log.d(LOGTAG, dbVersionCode + " " + verCode);
+                //  Log.d(LOGTAG, downloadMessage);
+                //  Log.d(LOGTAG, downloadLink);
 
             }
 
@@ -299,7 +304,7 @@ public class ViewRoutine extends AppCompatActivity
                 TextView fromTime = (TextView) convertView.findViewById(R.id.listviewFromtimetbx);
                 TextView toTime = (TextView) convertView.findViewById(R.id.listviewTotimetbx);
 
-                String tempRoomNo = "Room No : "+currentDayData.get(position).getRoomNumber();
+                String tempRoomNo = "Room No : " + currentDayData.get(position).getRoomNumber();
 
                 courseName.setText(currentDayData.get(position).getCourseName());
                 courseCode.setText(currentDayData.get(position).getCourseCode());
