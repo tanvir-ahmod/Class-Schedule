@@ -85,7 +85,7 @@ public class ViewDates extends AppCompatActivity {
                 RoutineStructure tempRoutine = new RoutineStructure(routine.getDay(), routine.getCourseName(), routine.getCourseCode(), routine.getStartTime(), routine.getEndTime(), routine.getEndTime());
                 String tempDate = " (" + formatter.format(calendar.getTime()) + ")";
                 tempRoutine.setDay(day + tempDate);
-                tempRoutine.setDate(calendar);
+                tempRoutine.setDate(calendar.getTime());
                 listOfRoutine.add(tempRoutine);
                 //Log.d(ViewRoutine.LOGTAG, "i = " + i + " day + date " + day + tempDate);
 
@@ -100,8 +100,13 @@ public class ViewDates extends AppCompatActivity {
             @Override
             public int compare(RoutineStructure lhs, RoutineStructure rhs) {
 
-                Calendar calendarRHD = rhs.getDate();
-                Calendar calendarLHS = lhs.getDate();
+                Calendar calendarRHD = Calendar.getInstance();
+                Calendar calendarLHS = Calendar.getInstance();
+
+                calendarLHS.setTime(lhs.getDate());
+                calendarRHD.setTime(rhs.getDate());
+
+                //Log.d(ViewRoutine.LOGTAG, "lhs " + lhs.getDate() + " rhs " + rhs.getDate());
 
                 return calendarLHS.compareTo(calendarRHD);
             }
