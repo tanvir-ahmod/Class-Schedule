@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,15 @@ public class RoutineFragment extends Fragment {
     RoutineAdapter routineAdapter;
     private Context context;
 
+    public RoutineFragment() {
+
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        routines = new ArrayList<>();
 
     }
 
@@ -39,6 +46,28 @@ public class RoutineFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(routineAdapter);
+
+        Bundle extras = this.getArguments();
+        if (extras != null) {
+            ArrayList<RoutineModel>  asd = extras.getParcelableArrayList(Constants.ROUTINE_MODEL);
+            routines  = new ArrayList<>(asd);
+
+            for(int i = 0; i < routines.size(); i++)
+            {
+                Log.d(Constants.LOGTAG, routines.get(i).getCourseCode());
+            }
+           //routineAdapter.notifyDataSetChanged();
+            Log.d(Constants.LOGTAG, "size " + routines.size());
+        }
+
+        /*if(routines == null || routines.size() == 0)
+        {
+            RoutineModel model = new RoutineModel();
+            model.setCourseCode("asd");
+
+
+            routines.add(model);
+        }*/
 
         RoutineModel routineModel = new RoutineModel();
         routineModel.setCourseName("a");
@@ -59,5 +88,10 @@ public class RoutineFragment extends Fragment {
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public void setRoutines(ArrayList<RoutineModel> routines) {
+        this.routines = new ArrayList<>(routines);
+//        routineAdapter.notifyDataSetChanged();
     }
 }

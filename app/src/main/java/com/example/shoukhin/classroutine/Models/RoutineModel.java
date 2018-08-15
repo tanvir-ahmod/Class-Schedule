@@ -1,5 +1,8 @@
 package com.example.shoukhin.classroutine.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +11,7 @@ import java.util.Date;
  * Created by Shoukhin on 16-Mar-17.
  */
 
-public class RoutineModel implements Serializable {
+public class RoutineModel implements Serializable, Parcelable {
 
 
     private String roomNumber;
@@ -19,6 +22,28 @@ public class RoutineModel implements Serializable {
     private String startTime;
     private String endTime;
     private Date date;
+
+    protected RoutineModel(Parcel in) {
+        roomNumber = in.readString();
+        key = in.readString();
+        day = in.readString();
+        courseName = in.readString();
+        courseCode = in.readString();
+        startTime = in.readString();
+        endTime = in.readString();
+    }
+
+    public static final Creator<RoutineModel> CREATOR = new Creator<RoutineModel>() {
+        @Override
+        public RoutineModel createFromParcel(Parcel in) {
+            return new RoutineModel(in);
+        }
+
+        @Override
+        public RoutineModel[] newArray(int size) {
+            return new RoutineModel[size];
+        }
+    };
 
     public Date getDate() {
         return date;
@@ -96,4 +121,19 @@ public class RoutineModel implements Serializable {
         this.roomNumber = roomNumber;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(roomNumber);
+        dest.writeString(key);
+        dest.writeString(day);
+        dest.writeString(courseName);
+        dest.writeString(courseCode);
+        dest.writeString(startTime);
+        dest.writeString(endTime);
+    }
 }

@@ -121,14 +121,14 @@ public class ViewRoutine extends AppCompatActivity
                     Intent intent = new Intent(ViewRoutine.this, WriteRoutine.class);
 
                     RoutineModel routine = currentDayData.get(position);
-                    intent.putExtra("routine", routine);
-                    intent.putExtra("day", cuurrentDayPosition);
+                   // intent.putExtra("routine", routine);
+                    //intent.putExtra("day", cuurrentDayPosition);
                     startActivity(intent);
                 } else {
                     RoutineModel routine = currentDayData.get(position);
                     Intent intent = new Intent(ViewRoutine.this, ViewDates.class);
-                    intent.putExtra("allData", allData);
-                    intent.putExtra("selectedRoutine", routine);
+                   // intent.putExtra("allData", allData);
+                   // intent.putExtra("selectedRoutine", routine);
                     startActivity(intent);
                 }
             }
