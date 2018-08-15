@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.shoukhin.classroutine.Adapters.FragmentPageAdapter;
+
 public class TabActivity extends AppCompatActivity {
 
     @Override
@@ -17,14 +19,18 @@ public class TabActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sat"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sun"));
+        tabLayout.addTab(tabLayout.newTab().setText("Mon"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tue"));
+        tabLayout.addTab(tabLayout.newTab().setText("Wed"));
+        tabLayout.addTab(tabLayout.newTab().setText("Thu"));
+        tabLayout.addTab(tabLayout.newTab().setText("Fri"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final FragmentPageAdapter adapter = new FragmentPageAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
+                (getSupportFragmentManager(), tabLayout.getTabCount(), this);
 
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

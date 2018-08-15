@@ -1,6 +1,5 @@
 package com.example.shoukhin.classroutine;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,7 +16,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.shoukhin.classroutine.Models.RoutineModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,8 +45,8 @@ public class ViewRoutine extends AppCompatActivity
     ListView viewRoutine;
     private static BaseAdapter adapter;
 
-    private static ArrayList<RoutineStructure> allData;
-    private static ArrayList<RoutineStructure> currentDayData;
+    private static ArrayList<RoutineModel> allData;
+    private static ArrayList<RoutineModel> currentDayData;
 
     private static DatabaseReference mFirebaseDatabase, updatedVersion;
 
@@ -94,7 +91,7 @@ public class ViewRoutine extends AppCompatActivity
                 currentDayData.clear();
                 //loop through the child
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    RoutineStructure routine = postSnapshot.getValue(RoutineStructure.class);
+                    RoutineModel routine = postSnapshot.getValue(RoutineModel.class);
                     routine.setKey(postSnapshot.getKey());
 
                     //storing all data into a arraylist
@@ -123,12 +120,12 @@ public class ViewRoutine extends AppCompatActivity
                     // User is not logged in, he can modify data
                     Intent intent = new Intent(ViewRoutine.this, WriteRoutine.class);
 
-                    RoutineStructure routine = currentDayData.get(position);
+                    RoutineModel routine = currentDayData.get(position);
                     intent.putExtra("routine", routine);
                     intent.putExtra("day", cuurrentDayPosition);
                     startActivity(intent);
                 } else {
-                    RoutineStructure routine = currentDayData.get(position);
+                    RoutineModel routine = currentDayData.get(position);
                     Intent intent = new Intent(ViewRoutine.this, ViewDates.class);
                     intent.putExtra("allData", allData);
                     intent.putExtra("selectedRoutine", routine);
@@ -351,9 +348,9 @@ public class ViewRoutine extends AppCompatActivity
     //sorting the routine according to time
     private static void sortByTime() {
 
-        Collections.sort(currentDayData, new Comparator<RoutineStructure>() {
+        Collections.sort(currentDayData, new Comparator<RoutineModel>() {
             @Override
-            public int compare(RoutineStructure lhs, RoutineStructure rhs) {
+            public int compare(RoutineModel lhs, RoutineModel rhs) {
                 SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
 
                 String timeLHS = lhs.getStartTime();

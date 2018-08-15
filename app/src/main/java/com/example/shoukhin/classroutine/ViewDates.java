@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.shoukhin.classroutine.Models.RoutineModel;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +23,8 @@ import java.util.Comparator;
 import java.util.Locale;
 
 public class ViewDates extends AppCompatActivity {
-    private ArrayList<RoutineStructure> allData;
-    private ArrayList<RoutineStructure> listOfRoutine;
+    private ArrayList<RoutineModel> allData;
+    private ArrayList<RoutineModel> listOfRoutine;
 
     ListView listView;
     private BaseAdapter adapter;
@@ -41,11 +43,11 @@ public class ViewDates extends AppCompatActivity {
 
         initialize();
 
-        RoutineStructure routine = (RoutineStructure) extras.get("selectedRoutine");
-        allData = (ArrayList<RoutineStructure>) extras.get("allData");
+        RoutineModel routine = (RoutineModel) extras.get("selectedRoutine");
+        allData = (ArrayList<RoutineModel>) extras.get("allData");
 
         for (int i = 0; i < allData.size(); i++) {
-            RoutineStructure tempRoutine = allData.get(i);
+            RoutineModel tempRoutine = allData.get(i);
             String tempCourseCode = routine.getCourseCode();
             String tempCourseName = routine.getCourseName();
 
@@ -119,7 +121,7 @@ public class ViewDates extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    private void getDateFromDay(final RoutineStructure routine) {
+    private void getDateFromDay(final RoutineModel routine) {
 
         String day = routine.getDay();
         int searchedDay = Arrays.asList(ViewRoutine.dayArray).indexOf(day);
@@ -138,7 +140,7 @@ public class ViewDates extends AppCompatActivity {
 
             if (searchedDay == dayOfWeek) {
 
-                RoutineStructure tempRoutine = new RoutineStructure(routine.getDay(), routine.getCourseName(), routine.getCourseCode(), routine.getStartTime(), routine.getEndTime(), routine.getRoomNumber());
+                RoutineModel tempRoutine = new RoutineModel(routine.getDay(), routine.getCourseName(), routine.getCourseCode(), routine.getStartTime(), routine.getEndTime(), routine.getRoomNumber());
                 String tempDate =  formatter.format(calendar.getTime());
                 tempRoutine.setRoomNumber( tempDate);
                 tempRoutine.setDate(calendar.getTime());
@@ -149,9 +151,9 @@ public class ViewDates extends AppCompatActivity {
 
     private void sortByDate() {
 
-        Collections.sort(listOfRoutine, new Comparator<RoutineStructure>() {
+        Collections.sort(listOfRoutine, new Comparator<RoutineModel>() {
             @Override
-            public int compare(RoutineStructure lhs, RoutineStructure rhs) {
+            public int compare(RoutineModel lhs, RoutineModel rhs) {
 
                 Calendar calendarRHD = Calendar.getInstance();
                 Calendar calendarLHS = Calendar.getInstance();

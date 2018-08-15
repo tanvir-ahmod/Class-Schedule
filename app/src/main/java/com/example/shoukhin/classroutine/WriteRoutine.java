@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.shoukhin.classroutine.Models.RoutineModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -65,7 +65,7 @@ public class WriteRoutine extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            RoutineStructure routine = (RoutineStructure) extras.get("routine");
+            RoutineModel routine = (RoutineModel) extras.get("routine");
             courseName.setText(routine.getCourseName());
             courseCode.setText(routine.getCourseCode());
             roomNumber.setText(routine.getRoomNumber());
@@ -144,7 +144,7 @@ public class WriteRoutine extends AppCompatActivity {
                 String temoToTime = toTime.getText().toString();
                 String tempRoomNumber = roomNumber.getText().toString();
 
-                RoutineStructure routine = new RoutineStructure(tempDay, tempCourseName, tempCourseCode, tempFromTime, temoToTime, tempRoomNumber);
+                RoutineModel routine = new RoutineModel(tempDay, tempCourseName, tempCourseCode, tempFromTime, temoToTime, tempRoomNumber);
 
                 //saving to firebase database
 

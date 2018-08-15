@@ -1,4 +1,4 @@
-package com.example.shoukhin.classroutine;
+package com.example.shoukhin.classroutine.Models;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Shoukhin on 16-Mar-17.
  */
 
-public class RoutineStructure implements Serializable {
+public class RoutineModel implements Serializable {
 
 
     private String roomNumber;
@@ -68,10 +68,26 @@ public class RoutineStructure implements Serializable {
         return endTime;
     }
 
-    public RoutineStructure() {
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public RoutineStructure(String day, String courseName, String courseCode, String startTime, String endTime, String roomNumber) {
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public RoutineModel() {
+    }
+
+    public RoutineModel(String day, String courseName, String courseCode, String startTime, String endTime, String roomNumber) {
         this.day = day;
         this.courseName = courseName;
         this.courseCode = courseCode;
