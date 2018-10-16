@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.shoukhin.classroutine.Constants;
+import com.example.shoukhin.classroutine.utilities.Constants;
 import com.example.shoukhin.classroutine.Models.RoutineModel;
 import com.example.shoukhin.classroutine.RoutineFragment;
 

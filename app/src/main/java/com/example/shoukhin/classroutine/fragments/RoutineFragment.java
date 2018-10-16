@@ -10,9 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shoukhin.classroutine.Adapters.RoutineAdapter;
-import com.example.shoukhin.classroutine.Constants;
+import com.example.shoukhin.classroutine.utilities.Constants;
 import com.example.shoukhin.classroutine.Models.RoutineModel;
 import com.example.shoukhin.classroutine.R;
+import com.example.shoukhin.classroutine.utilities.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,24 +40,25 @@ public class RoutineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_routine, container, false);
         ButterKnife.bind(this, view);
         initializeVariables();
-
-
         int day = 0;
 
         if (getArguments() != null)
             day = getArguments().getInt(Constants.EXTRA_DAY);
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child(Constants.ROUTINE_MODEL);
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(Constants.ROUTINE);
         Query query = databaseReference.orderByChild(Constants.DAY).equalTo(Constants.DAY_ARRAY[day]);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                allData.clear();
                 for (DataSnapshot tempDataSnapShot : dataSnapshot.getChildren()) {
                     try {
+                        //Utils.showLogcatMessage("key " + tempDataSnapShot.getKey());
                         RoutineModel routine = tempDataSnapShot.getValue(RoutineModel.class);
                         if (routine != null) {
+
                             routine.setKey(tempDataSnapShot.getKey());
                             allData.add(routine);
                         }
