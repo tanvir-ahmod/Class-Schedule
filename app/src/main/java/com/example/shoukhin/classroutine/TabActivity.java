@@ -3,6 +3,9 @@ package com.example.shoukhin.classroutine;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +13,7 @@ import android.util.Log;
 
 import com.example.shoukhin.classroutine.Adapters.FragmentPageAdapter;
 import com.example.shoukhin.classroutine.Models.RoutineModel;
+import com.example.shoukhin.classroutine.fragments.RoutineFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,53 +21,38 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TabActivity extends AppCompatActivity {
-
+    TabLayout tabLayout;
     private ArrayList<RoutineModel> routines = new ArrayList<>();
+    private final int DAY_IN_WEEK = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabactivity);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("View Routine");
         setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Sat"));
-        tabLayout.addTab(tabLayout.newTab().setText("Sun"));
-        tabLayout.addTab(tabLayout.newTab().setText("Mon"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tue"));
-        tabLayout.addTab(tabLayout.newTab().setText("Wed"));
-        tabLayout.addTab(tabLayout.newTab().setText("Thu"));
-        tabLayout.addTab(tabLayout.newTab().setText("Fri"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final FragmentPageAdapter adapter = new FragmentPageAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount(), this);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        for(int i = 0; i < DAY_IN_WEEK; i++){
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constants.EXTRA_DAY, 0);
+            RoutineFragment routineFragment = new RoutineFragment();
+            routineFragment.setArguments(bundle);
+            adapter.addFragment(routineFragment, Constants.DAY_ARRAY[i]);
+        }
 
+        //adapter.addFragment(new PendingFragment(), "Pending Orders");
+        viewPager.setAdapter(adapter);
 
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+       /* FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.setPersistenceEnabled(true);
         DatabaseReference mFirebaseDatabase = FirebaseDatabase.getInstance().getReference("routine");
 
@@ -81,15 +70,42 @@ public class TabActivity extends AppCompatActivity {
                 }
                 adapter.setRoutines(routines);
                 viewPager.setAdapter(adapter);
-               // Log.d(Constants.LOGTAG, "routine size : " + routines.size());
+                // Log.d(Constants.LOGTAG, "routine size : " + routines.size());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
+    }
 
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

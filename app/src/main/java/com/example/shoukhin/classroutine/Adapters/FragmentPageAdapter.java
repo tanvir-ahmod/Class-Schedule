@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
 
 import com.example.shoukhin.classroutine.Constants;
 import com.example.shoukhin.classroutine.Models.RoutineModel;
@@ -91,8 +90,8 @@ public class FragmentPageAdapter extends FragmentStatePagerAdapter {
         //Log.d(Constants.LOGTAG, "routine size in fragmentPageAdpater:" + routines.size());
         for (int i = 0; i < routines.size(); i++) {
             /*Log.d(Constants.LOGTAG, "daycode " + dayCode + " day + " + routines.get(i).getDay() + " "
-                    + Constants.dayArray[dayCode]);*/
-            if (routines.get(i).getDay().equals(Constants.dayArray[dayCode]))
+                    + Constants.DAY_ARRAY[dayCode]);*/
+            if (routines.get(i).getDay().equals(Constants.DAY_ARRAY[dayCode]))
                 routine.add(routines.get(i));
         }
         sortByTime(routine);
