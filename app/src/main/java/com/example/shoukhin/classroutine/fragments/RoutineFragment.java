@@ -67,6 +67,7 @@ public class RoutineFragment extends Fragment {
                     }
                 }
 
+                recyclerView.getRecycledViewPool().clear();
                 routineAdapter.notifyDataSetChanged();
 
             }

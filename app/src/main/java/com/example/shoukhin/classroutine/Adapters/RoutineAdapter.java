@@ -27,7 +27,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ItemView
     @Override
     public RoutineAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.listview, parent, false);
+                .inflate(R.layout.list_view_routine, parent, false);
         return new ItemViewHolder(itemView);
     }
 
