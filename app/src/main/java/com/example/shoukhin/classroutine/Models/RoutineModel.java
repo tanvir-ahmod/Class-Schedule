@@ -22,6 +22,7 @@ public class RoutineModel implements Serializable, Parcelable {
     private String startTime;
     private String endTime;
     private Date date;
+    private int dayOfWeek;
 
     protected RoutineModel(Parcel in) {
         roomNumber = in.readString();
@@ -119,6 +120,14 @@ public class RoutineModel implements Serializable, Parcelable {
         this.startTime = startTime;
         this.endTime = endTime;
         this.roomNumber = roomNumber;
+    }
+
+    public int getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(int dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
     @Override

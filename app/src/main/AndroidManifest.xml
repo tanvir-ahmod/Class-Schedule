@@ -20,9 +20,7 @@
         <activity
             android:name=".ViewRoutine"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".TabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,6 +64,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.shoukhin.classroutine.ViewRoutine" />
         </activity>
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>
